@@ -1,0 +1,23 @@
+{
+  "name": "esd-website",
+  "version": "1.0.0",
+  "description": "IBU ESD club official website.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node rest/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aldin-SXR/esd-website.git"
+  },
+  "author": "Aldin Kovačević",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aldin-SXR/esd-website/issues"
+  },
+  "homepage": "https://github.com/Aldin-SXR/esd-website#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
