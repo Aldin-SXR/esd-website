@@ -1,6 +1,6 @@
 const express = require("express");
 
-let port = 3001 || process.env.PORT;
+let port = process.env.PORT || 3000;
 let app = express();
 
 app.get("/", (req, res) => {
