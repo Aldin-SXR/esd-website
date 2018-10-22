@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<title>IBU Embedded System Design</title>
 	<meta charset="UTF-8">
 	<meta name="description" content="WebUni Education Template">
 	<meta name="keywords" content="webuni, education, creative, html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Favicon -->   
-	<link href="img/favicon.ico" rel="shortcut icon"/>
+	<!-- Favicon -->
+	<link href="img/favicon.ico" rel="shortcut icon" />
 
 	<!-- Google Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">
 
 	<!-- Stylesheets -->
-	<link rel="stylesheet" href="css/bootstrap.min.css"/>
-	<link rel="stylesheet" href="css/font-awesome.min.css"/>
-	<link rel="stylesheet" href="css/owl.carousel.css"/>
-	<link rel="stylesheet" href="css/style.css"/>
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/font-awesome.min.css" />
+	<link rel="stylesheet" href="css/owl.carousel.css" />
+	<link rel="stylesheet" href="css/style.css" />
 
 
 	<!--[if lt IE 9]>
@@ -25,6 +26,7 @@
 	<![endif]-->
 
 </head>
+
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -66,7 +68,8 @@
 		<div class="container">
 			<div class="hero-text text-white">
 				<h2>Get The Best Free Online Courses</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla <br> dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at
+					rutrum nulla <br> dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
 			</div>
 			<div class="row">
 				<div class="col-lg-10 offset-lg-1">
@@ -83,76 +86,22 @@
 
 
 	<!-- categories section -->
-	<section class="categories-section spad">
+	<section ng-app="esd-app" ng-controller="newsController" class="categories-section spad">
 		<div class="container">
 			<div class="section-title">
-				<h2>Our Course Categories</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+				<h2>Latest News:</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at
+					rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
 			</div>
 			<div class="row">
 				<!-- categorie -->
-				<div class="col-lg-4 col-md-6">
+				<div ng-repeat="info in news" class="col-lg-4 col-md-6">
 					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/1.jpg"></div>
+						<div class="ci-thumb set-bg" ng-style="{ 'background-image': 'url({{ info.image }})' }"></div>
 						<div class="ci-text">
-							<h5>IT Development</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur</p>
+							<h5>{{ info.title }}</h5>
+							<p>{{ info.description }}</p>
 							<span>120 Courses</span>
-						</div>
-					</div>
-				</div>
-				<!-- categorie -->
-				<div class="col-lg-4 col-md-6">
-					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/2.jpg"></div>
-						<div class="ci-text">
-							<h5>Web Design</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur</p>
-							<span>70 Courses</span>
-						</div>
-					</div>
-				</div>
-				<!-- categorie -->
-				<div class="col-lg-4 col-md-6">
-					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/3.jpg"></div>
-						<div class="ci-text">
-							<h5>Illustration & Drawing</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur</p>
-							<span>55 Courses</span>
-						</div>
-					</div>
-				</div>
-				<!-- categorie -->
-				<div class="col-lg-4 col-md-6">
-					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/4.jpg"></div>
-						<div class="ci-text">
-							<h5>Social Media</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur</p>
-							<span>40 Courses</span>
-						</div>
-					</div>
-				</div>
-				<!-- categorie -->
-				<div class="col-lg-4 col-md-6">
-					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/5.jpg"></div>
-						<div class="ci-text">
-							<h5>Photoshop</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur</p>
-							<span>220 Courses</span>
-						</div>
-					</div>
-				</div>
-				<!-- categorie -->
-				<div class="col-lg-4 col-md-6">
-					<div class="categorie-item">
-						<div class="ci-thumb set-bg" data-setbg="img/categories/6.jpg"></div>
-						<div class="ci-text">
-							<h5>Cryptocurrencies</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur</p>
-							<span>25 Courses</span>
 						</div>
 					</div>
 				</div>
@@ -190,7 +139,8 @@
 		<div class="container">
 			<div class="section-title mb-0">
 				<h2>Featured Courses</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at
+					rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
 			</div>
 		</div>
 		<div class="course-warp">
@@ -200,7 +150,7 @@
 				<li class="control" data-filter=".design">Design</li>
 				<li class="control" data-filter=".web">Web Development</li>
 				<li class="control" data-filter=".photo">Photography</li>
-			</ul>                                       
+			</ul>
 			<div class="row course-items-area">
 				<!-- course -->
 				<div class="mix col-lg-3 col-md-4 col-sm-6 finance">
@@ -369,7 +319,8 @@
 					<div class="signup-warp">
 						<div class="section-title text-white text-left">
 							<h2>Sign up to became a teacher</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at
+								rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
 						</div>
 						<!-- signup form -->
 						<form class="signup-form">
@@ -393,7 +344,8 @@
 		<div class="container">
 			<div class="section-title mb-0 pb-2">
 				<h2>Join Our Community Now!</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at
+					rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
 			</div>
 			<div class="text-center pt-5">
 				<a href="#" class="site-btn">Register Now</a>
@@ -464,15 +416,22 @@
 					<li><a href="#">Register</a></li>
 					<li><a href="#">Privacy</a></li>
 				</ul>
-				<div class="copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
+				<div class="copyright">
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					Copyright &copy;
+					<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i
+					 class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+				</div>
 			</div>
 		</div>
-	</footer> 
+	</footer>
 	<!-- footer section end -->
 
-
+	<!-- === AngularJS === -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+	<!-- Controllers -->
+	<script src="controllers/newsController.js"></script>
 	<!--====== Javascripts & Jquery ======-->
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -480,4 +439,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="js/circle-progress.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/main.js"></script>
+	<script>
+		let app = angular.module("esd-app", []);
+		app.controller("newsController", newsController);
+	</script>
+
 </html>
