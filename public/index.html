@@ -41,7 +41,7 @@
 			<div class="row">
 				<div class="col-lg-3 col-md-3">
 					<div class="site-logo">
-						<img src="img/logo.png" alt="">
+						<img src="img/embedded_logo.png" alt="">
 					</div>
 					<div class="nav-switch">
 						<i class="fa fa-bars"></i>
@@ -50,12 +50,12 @@
 				<div class="col-lg-9 col-md-9">
 					<a href="" class="site-btn header-btn">Login</a>
 					<nav class="main-menu">
-						<ul>
-							<li><a href="#!/">Home</a></li>
+						<ul ng-controller="linksController">
+							<li><a ng-class="{'active': activeTab == 'home'}" href="#!/">Home</a></li>
 							<li><a href="#">About us</a></li>
 							<li><a href="courses.html">Courses</a></li>
 							<li><a href="blog.html">News</a></li>
-							<li><a href="#!contact">Contact</a></li>
+							<li><a ng-class="{'active': activeTab == 'contact'}" href="#!contact">Contact</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -142,6 +142,7 @@
 	<!-- Controllers -->
 	<script src="js/controllers/newsController.js"></script>
 	<script src="js/controllers/mapController.js"></script>
+	<script src="js/controllers/linksController.js"></script>
 	<script src="js/app.js"></script>
 	<!--====== Javascripts & Jquery ======-->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWTIlluowDL-X4HbYQt3aDw_oi2JP0Krc&sensor=false"></script>
