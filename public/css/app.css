@@ -1,0 +1,18 @@
+.modal.fade.in {
+    opacity: 1;
+}
+.modal.in .modal-dialog {
+  transform: translate(0, 0);
+}
+.modal-backdrop.in {
+  opacity: 0.5;
+  /* opacity: $modal-backdrop-opacity; (SCSS) */
+}
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.faded {
+  -moz-transition: opacity 0.5s;
+  -webkit-transition: opacity 0.5s;
+  opacity: 0;
+}

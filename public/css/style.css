@@ -192,9 +192,9 @@ ol {
 	color: #1f1f1f;
 }
 
-/* Preloder */
+/* Preloader */
 
-#preloder {
+#preloader {
 	position: fixed;
 	width: 100%;
 	height: 100%;
@@ -1758,4 +1758,47 @@ ol {
 	.contact-info-area .social-links a {
 		margin-right: 10px;
 	}
+}
+
+/* About cards */
+.about-img {
+	object-fit: cover;
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+}
+
+.member-title {
+	margin-bottom: 10px;
+	color: #4169e1
+}
+
+.member-card {
+	height: 550px;
+	margin-bottom: 5%;
+}
+
+@media screen and (max-width: 768px) {
+	.center-content {
+		text-align: center
+	}
+	.member-card {
+		height: auto;
+		margin-bottom: 10%;
+		padding: 10%;
+	}
+	.member-title {
+		margin-top: 5%;
+	}
+}
+
+.left.carousel-control {background-image: none}
+.glyphicon-chevron-left, .glyphicon-chevron-right { color: #000 }
+.right.carousel-control {background-image: none }
+.carousel-indicators li { 
+	border: 1px solid #000
+}
+
+.item .text-center {
+	text-align: left !important;
 }

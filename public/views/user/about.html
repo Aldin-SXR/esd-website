@@ -1,0 +1,83 @@
+<!-- Page info -->
+<div class="page-info-section set-bg" ng-style="{ 'background-image': 'url(img/page-bg/about_page.jpg)' }">
+    <div class="container">
+        <div class="site-breadcrumb">
+            <a href="#!/">Home</a>
+            <span>About us</span>
+        </div>
+    </div>
+</div>
+<!-- Page info end -->
+
+<!-- Page -->
+<section class="contact-page spad pb-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title mb-0">
+                    <h2>About the Club</h2>
+                    <p>The Embedded System Design Electronics Club is a student club founded in 2014 at the
+                        International Burch University in Sarajevo. The Club is an educational and nonprofitable
+                        organization which organizes workshops, presentations, lectures, competitions and similar
+                        events for both members of the Club and interested individuals from the outside. The main focus
+                        areas of the club include the development and design of embedded systems, hardware and
+                        electronics.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="contact-page spad pb-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title mb-0">
+                    <h2>Honors & Awards</h2>
+                    <div class="row justify-content-center" ng-controller="awardsController">
+                        <div class="col-md-4" ng-repeat="award in awards">
+                            <div ng-switch on="award.type">
+                                <img ng-switch-when="award" src="img/awards.png" style="width: auto; height: 100px; margin-bottom: 5%">
+                                <img ng-switch-when="honor" src="img/honors.png" style="width: auto; height: 100px; margin-bottom: 5%">
+                            </div>
+                            <h5>{{ award.description }}</h5>
+                            <h6>{{ award.year }}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="course-section spad" ng-controller="membersController">
+    <div class="container">
+        <div class="section-title mb-0">
+            <h2>Club Leadership</h2>
+            <br>
+        </div>
+        <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+            <div uib-slide ng-repeat="member in members track by $index" index="$index">
+                <div class="row justify-content-center member-card">
+                    <div class="col-xs-12 col-md-8">
+                        <div class="row justify-content-center">
+                            <div class="col-xs-12 col-md-4 center-content">
+                                <img class="about-img" src="{{ member.picture }}">
+                            </div>
+                            <div class="col-md-8 center-content">
+                                <h4 class="member-title">{{ member.name }}</h4>
+                                <h5>{{ member.title }} &nbsp;
+                                    <a href="{{ member.social_links.linkedin }}"><i title="LinkedIn profile" class="fa fa-linkedin"></i></a>
+                                </h5>
+                                <br>
+                                <p>
+                                    {{ member.short_bio }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

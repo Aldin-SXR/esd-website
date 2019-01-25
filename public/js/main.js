@@ -11,10 +11,10 @@
 
 $(window).on('load', function() {
 	/*------------------
-		Preloder
+		Preloader
 	--------------------*/
 	$(".loader").fadeOut(); 
-	$("#preloder").delay(400).fadeOut("slow");
+	$("#preloader").delay(400).fadeOut("slow");
 
 
 	/*------------------

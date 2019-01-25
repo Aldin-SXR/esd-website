@@ -17,21 +17,9 @@ const mapController = ($scope) => {
         let contentString = '<div id="content">'+
             '<div id="siteNotice">'+
             '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+            '<h4 id="firstHeading" class="firstHeading">International Burch University</h4>'+
             '<div id="bodyContent">'+
-            '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-            'sandstone rock formation in the southern part of the '+
-            'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-            'south west of the nearest large town, Alice Springs; 450&#160;km '+
-            '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-            'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-            'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-            'Aboriginal people of the area. It has many springs, waterholes, '+
-            'rock caves and ancient paintings. Uluru is listed as a World '+
-            'Heritage Site.</p>'+
-            '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-            'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-            '(last visited June 22, 2009).</p>'+
+            '<p><b><img style="margin: 10px 10px 10px 0px; witdth: 100px; height: 100px;" align="left" src="img/burch_logo.jpg"><a href="https://www.ibu.edu.ba">International Burch University (IBU)</a></b> was established in 2008 in Sarajevo, capital of Bosnia and Herzegovina, with the goal of presenting a unique opportunity to rethink the very idea of a modern university and formulate a blueprint for the future. Burch University began with a determined mission: “To advance learning and transform lives”. Now University pursues to adapt successfully to the needs of students by investing in world-class facilities for teaching, learning, research and recreation. With some of the highest quality teaching and research and the broadest spread o academic subjects, we will be able to complete in order being recognized as one of the leading universities in the region.</p>' +
             '</div>'+
             '</div>';
     
