@@ -1,4 +1,4 @@
-const app = angular.module("esd-app", [ "ngAnimate", "ui.bootstrap", "ngRoute"]);
+const app = angular.module("esd-app", [ "ngAnimate", "ngSanitize", "ui.bootstrap", "ngRoute"]);
 
 app.config(($routeProvider) => {
     $routeProvider.when("/", {
@@ -20,3 +20,4 @@ app.controller("linksController", linksController);
 app.controller("membersController", membersController);
 app.controller("pageController", pageController);
 app.controller("awardsController", awardsController);
+app.controller("loginController", loginController);

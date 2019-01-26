@@ -1,0 +1,101 @@
+<div class="content">
+    <div class="container-fluid" ng-controller="membersListController">
+        <div class="row justify-content-end">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="pageSize">Page size:</label>
+                    <select class="card-category form-control" id="pageSize" ng-model="limit" ng-change="changeLimit()">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Club Members</h4>
+                        <p class="card-category">Preview list of all club members.</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="text-primary">
+                                    <!-- <th>
+                                            ID
+                                        </th> -->
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Department
+                                    </th>
+                                    <th>
+                                        Year
+                                    </th>
+                                    <th>
+                                        Member since
+                                    </th>
+                                    <th>
+                                        Adminstrator
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="member in members">
+                                        <!-- <td>
+                                                {{ member._id }}
+                                            </td> -->
+                                        <td>
+                                            {{ member.name }}
+                                        </td>
+                                        <td>
+                                            {{ member.department }}
+                                        </td>
+                                        <td>
+                                            {{ member.year }}
+                                        </td>
+                                        <td>
+                                            {{ member.member_since }}
+                                        </td>
+                                        <td class="text-primary">
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input" type="checkbox" value="" ng-checked="{{ member.superuser }}"
+                                                        ng-disabled="true">
+                                                    <span class="form-check-sign">
+                                                        <span class="check"></span>
+                                                    </span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td class="td-actions text-left">
+                                            <button type="button" rel="tooltip" title="Edit" class="btn btn-primary btn-link btn-sm">
+                                                <i class="material-icons">edit</i>
+                                            </button>
+                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-start">
+            <div class="col-md-3">
+                <ul uib-pagination items-per-page="limit" force-ellipses="true" total-items="totalItems" max-size="maxSize"
+                    ng-model="page" ng-change="changePage()">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,93 @@
+<div class="content">
+    <div class="container-fluid" ng-controller="newsListController">
+        <div class="row justify-content-between">
+                <div class="col-md-2">
+                        <button class="btn btn-primary" ng-click="writeNewArticle()">
+                                <i class="material-icons">assignment</i>&nbsp;
+                            Write a post
+                        </button>
+                    </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="pageSize">Page size:</label>
+                    <select class="card-category form-control" id="pageSize" ng-model="limit" ng-change="changeLimit()">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">News Preview</h4>
+                        <p class="card-category">Preview list of all published news and posts.</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="text-primary">
+                                    <!-- <th>
+                                                ID
+                                            </th> -->
+                                    <th>
+                                        Title
+                                    </th>
+                                    <th>
+                                        Category
+                                    </th>
+                                    <th>
+                                        Published at:
+                                    </th>
+                                    <th>
+                                        Author
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="news in newsPreview">
+                                        <!-- <td>
+                                                    {{ member._id }}
+                                                </td> -->
+                                        <td>
+                                            {{ news.title }}
+                                        </td>
+                                        <td>
+                                            {{ news.category_name }}
+                                        </td>
+                                        <td>
+                                            {{ news.published_at }}
+                                        </td>
+                                        <td>
+                                            {{ news.author_name }}
+                                        </td>
+                                        <td class="td-actions text-left">
+                                            <button type="button" rel="tooltip" title="Edit" class="btn btn-primary btn-link btn-sm">
+                                                <i class="material-icons">edit</i>
+                                            </button>
+                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-start">
+            <div class="col-md-3">
+                <ul uib-pagination items-per-page="limit" force-ellipses="true" total-items="totalItems" max-size="maxSize"
+                    ng-model="page" ng-change="changePage()">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
