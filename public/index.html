@@ -14,7 +14,6 @@
 	<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">
 
 	<!-- Stylesheets -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/bootstrap.min.css" />
 	<link rel="stylesheet" href="css/font-awesome.min.css" />
 	<link rel="stylesheet" href="css/style.css" />
@@ -26,11 +25,11 @@
 	<!-- === AngularJS === -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular-route.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular-animate.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular-animate.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular-sanitize.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
-    <script src="https://unpkg.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/angular-toastr/dist/angular-toastr.css" />   
+	<script src="js/ui-bootstrap-tpls-3.0.6.min.js"></script>
+	<script src="https://unpkg.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/angular-toastr/dist/angular-toastr.css" />
 </head>
 
 <body ng-app="esd-app">
@@ -39,7 +38,7 @@
 		<div class="loader"></div>
 	</div>
 	<script type="text/javascript">
-		window.addEventListener("load", function(event) {
+		window.addEventListener("load", function (event) {
 			/* Delete the preloader element */
 			var element = document.getElementById("preloader").className += " faded";
 			setTimeout(() => {
@@ -68,7 +67,7 @@
 							<li><a ng-class="{'active': activeTab == 'home'}" href="#!/">Home</a></li>
 							<li><a ng-class="{'active': activeTab == 'about'}" href="#!about">About us</a></li>
 							<li><a href="courses.html">Courses</a></li>
-							<li><a href="blog.html">News</a></li>
+							<li><a ng-class="{'active': activeTab == 'news'}" href="#!news">News</a></li>
 							<li><a ng-class="{'active': activeTab == 'contact'}" href="#!contact">Contact</a></li>
 						</ul>
 					</nav>
@@ -89,48 +88,41 @@
 					<div class="widget-item">
 						<h4>Contact Info</h4>
 						<ul class="contact-list">
-								<li>Francuske revolucije bb. <br>Ilidža, 71210</li>
-								<li><a href="tel:+387603383856">+387603383856</a></li>
-								<li><a href="mailto:esdclub@gmail.com">esdclub@gmail.com</a></li>
+							<li>Francuske revolucije bb. <br>Ilidža, 71210</li>
+							<li><a href="tel:+387603383856">+387603383856</a></li>
+							<li><a href="mailto:esdclub@gmail.com">esdclub@gmail.com</a></li>
 						</ul>
 					</div>
 					<div class="widget-item">
-						<h4>Engeneering</h4>
+						<h4>Quick Links</h4>
 						<ul>
-							<li><a href="">Applied Studies</a></li>
-							<li><a href="">Computer Engeneering</a></li>
-							<li><a href="">Software Engeneering</a></li>
-							<li><a href="">Informational Engeneering</a></li>
-							<li><a href="">System Engeneering</a></li>
+							<li><a href="#!/">Home</a></li>
+							<li><a href="#!about">About us</a></li>
+							<li><a href="#!news">News & Articles</a></li>
+							<li><a href="#!contact">Contact us</a></li>
 						</ul>
 					</div>
 					<div class="widget-item">
-						<h4>Graphic Design</h4>
-						<ul>
-							<li><a href="">Applied Studies</a></li>
-							<li><a href="">Computer Engeneering</a></li>
-							<li><a href="">Software Engeneering</a></li>
-							<li><a href="">Informational Engeneering</a></li>
-							<li><a href="">System Engeneering</a></li>
-						</ul>
-					</div>
-					<div class="widget-item">
-						<h4>Development</h4>
-						<ul>
-							<li><a href="">Applied Studies</a></li>
-							<li><a href="">Computer Engeneering</a></li>
-							<li><a href="">Software Engeneering</a></li>
-							<li><a href="">Informational Engeneering</a></li>
-							<li><a href="">System Engeneering</a></li>
-						</ul>
-					</div>
-					<div class="widget-item">
-						<h4>Newsletter</h4>
+					<!-- <h4>Newsletter</h4>
 						<form class="footer-newslatter">
 							<input type="email" placeholder="E-mail">
 							<button class="site-btn">Subscribe</button>
 							<p>*We don’t spam</p>
-						</form>
+						</form> -->
+					</div>
+					<div class="widget-item">
+					<!-- <h4>Newsletter</h4>
+						<form class="footer-newslatter">
+							<input type="email" placeholder="E-mail">
+							<button class="site-btn">Subscribe</button>
+							<p>*We don’t spam</p>
+						</form> -->
+					</div>
+					<div class="widget-item">
+						<h4>Social media</h4>
+						<ul>
+							<li><a href="https://www.facebook.com/IBUesd/">Facebook</a></li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -154,13 +146,15 @@
 	</footer>
 	<!-- footer section end -->
 	<!-- Controllers -->
-	<script src="js/controllers/user/newsController.js"></script>
+	<script src="js/controllers/user/latestNewsController.js"></script>
 	<script src="js/controllers/user/mapController.js"></script>
 	<script src="js/controllers/user/linksController.js"></script>
 	<script src="js/controllers/user/membersController.js"></script>
 	<script src="js/controllers/user/pageController.js"></script>
 	<script src="js/controllers/user/awardsController.js"></script>
 	<script src="js/controllers/user/loginController.js"></script>
+	<script src="js/controllers/user/newsPreviewController.js"></script>
+	<script src="js/controllers/user/singleArticleController.js"></script>
 	<script src="js/app.js"></script>
 	<!--====== Javascripts & Jquery ======-->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUsG1yD6CxrEzezDkdsSWYxDaXmIt29XA"></script>
@@ -168,4 +162,5 @@
 	<!-- <script src="js/bootstrap.min.js"></script>
 	<script src="js/mixitup.min.js"></script> -->
 	<!-- <script src="js/main.js"></script> -->
+
 </html>

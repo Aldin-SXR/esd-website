@@ -1,5 +1,5 @@
 const membersController = ($scope, $http) => {
-    $http.get("/user/members/preview").then((response) => {
+    $http.get("/leaders/short").then((response) => {
         $scope.members = response.data;
     }, (error) => {
         console.log(error);

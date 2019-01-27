@@ -1,0 +1,114 @@
+<!-- Page info -->
+<div class="page-info-section set-bg" ng-style="{ 'background-image': 'url(img/page-bg/about_page.jpg)' }">
+    <div class="container">
+        <div class="site-breadcrumb">
+            <a href="#!/">Home</a>
+            <span>News</span>
+        </div>
+    </div>
+</div>
+<!-- Page info end -->
+
+<!-- Page  -->
+<section class="blog-page spad pb-0" ng-controller="newsPreviewController">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div ng-show="!news.length">
+                    <p>
+                        No news available in this category.
+                    </p>
+                </div>
+                <!-- blog post -->
+                <!-- <div class="blog-post">
+                    <img src="img/blog/1.jpg" alt="">
+                    <h3>How to create the perfect resume</h3>
+                    <div class="blog-metas">
+                        <div class="blog-meta author">
+                            <div class="post-author set-bg" data-setbg="img/authors/1.jpg"></div>
+                            <a href="#">James Smith</a>
+                        </div>
+                        <div class="blog-meta">
+                            <a href="#">Development</a>
+                        </div>
+                        <div class="blog-meta">
+                            <a href="#">June 12, 2018</a>
+                        </div>
+                        <div class="blog-meta">
+                            <a href="#">2 Comments</a>
+                        </div>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur. Phasellus sollicitudin et nunc eu efficitur. Sed ligula
+                        nulla, molestie quis ligula in, eleifend rhoncus ipsum. Donec ultrices, sem vel efficitur
+                        molestie, massa nisl posuere ipsum, ut vulputate mauris ligula a metus. Aenean vel congue diam,
+                        sed bibendum ipsum. Nunc vulputate aliquet tristique. Integer et pellentesque urna. </p>
+                    <a href="#" class="site-btn readmore">Read More</a>
+                </div> -->
+                <div ng-repeat="article in news" class="blog-post">
+                    <div class="course-item">
+                        <div class="course-thumb set-bg" ng-style="{ 'background-image': 'url({{ article.image }})' }">
+                        </div>
+                    </div>
+                    <h3>{{ article.title }}</h3>
+                    <div class="blog-metas">
+                        <div class="blog-meta author">
+                            <div class="post-author set-bg" ng-style="{ 'background-image': 'url({{ article.author_picture }})' }"></div>
+                            <a href="#">{{ article.author_name }}</a>
+                        </div>
+                        <div class="blog-meta">
+                            <a href="#">{{ article.category_name }}</a>
+                        </div>
+                        <div class="blog-meta">
+                            <a href="#">{{ article.published_at }}</a>
+                        </div>
+                        <!-- <div class="blog-meta">
+                            <a href="#">2 Comments</a>
+                        </div> -->
+                    </div>
+                    <p>{{ article.description }}</p>
+                    <button ng-click="openArticle(article)" class="site-btn readmore">Read More</button>
+                </div>
+                <div class="row site-pagination">
+                    <div class="col-md-3">
+                        <ul uib-pagination items-per-page="limit" force-ellipses="true" total-items="totalItems"
+                            max-size="maxSize" ng-model="page" ng-change="changePage()">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-5 col-sm-9 sidebar">
+                <div class="sb-widget-item">
+                    <form class="search-widget">
+                        <input type="text" placeholder="Search">
+                        <button><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="sb-widget-item">
+                    <h4 class="sb-w-title">Categories</h4>
+                    <ul class="controls">
+                        <li class="category-link" ng-click="changeCategory('')" ng-class="{'active': category_id == ''}">All</li>
+                        <li class="category-link" ng-repeat="category in news_categories" ng-class="{'active': category_id == category._id}"
+                            ng-click="changeCategory(category._id)">{{
+                            category.name }}</li>
+                    </ul>
+                </div>
+                <div class="sb-widget-item">
+                    <h4 class="sb-w-title">Archives</h4>
+                    <ul>
+                        <li><a href="#">February 2018</a></li>
+                        <li><a href="#">March 2018</a></li>
+                        <li><a href="#">April 2018</a></li>
+                        <li><a href="#">May 2018</a></li>
+                        <li><a href="#">June 2018</a></li>
+                    </ul>
+                </div>
+                <div class="sb-widget-item">
+                    <div class="add">
+                        <a href="#"><img src="img/add.jpg" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Page end -->

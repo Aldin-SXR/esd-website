@@ -1,4 +1,4 @@
-const adminApp = angular.module("esd-admin-app", [ "ui.select", "ngAnimate", "ngSanitize", "ui.bootstrap", "ngRoute", "ui.tinymce"]);
+const adminApp = angular.module("esd-admin-app", [ "ui.select", "ngAnimate", "ngSanitize", "ui.bootstrap", "ngRoute", "ui.tinymce", "toastr"]);
 
 adminApp.config(($routeProvider) => {
     $routeProvider.when("/", {
@@ -16,14 +16,17 @@ adminApp.config(($routeProvider) => {
     }).when("/news/new", {
         templateUrl: "views/admin/news-write.html",
         activeTab: "news",
-        viewTitle: "News & Posts"
+        viewTitle: "Write an Article"
+    }).when("/news/edit/:id", {
+        templateUrl: "views/admin/news-write.html",
+        activeTab: "news",
+        viewTitle: "Edit an Article"
     })
 })
 
 adminApp.run(['$rootScope', ($rootScope) => {
     $rootScope.$on('$routeChangeSuccess', (event, current, previous) => {
         $rootScope.viewTitle = current.$$route.viewTitle;
-        console.log(current.$$route.viewTitle);
     });
 }]);
 

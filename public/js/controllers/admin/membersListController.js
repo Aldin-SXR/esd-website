@@ -5,7 +5,7 @@ const membersListController = ($scope, $http) => {
     $scope.maxSize = 5;
 
     $scope.getMembers = (start, limit) => {
-        $http.get("/admin/members/preview?start=" + start + "&limit=" + limit).then((response) => {
+        $http.get("/private/members/preview?start=" + start + "&limit=" + limit, HTTP_CONFIG).then((response) => {
             $scope.members = response.data.members;
             $scope.totalItems = response.data.numOfMembers;
         }, (error) => {

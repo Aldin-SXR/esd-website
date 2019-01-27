@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/Aldin-SXR/esd-website#readme",
   "dependencies": {
+    "bcrypt": "^3.0.3",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
     "mongodb": "^2.2.33"
   }
 }

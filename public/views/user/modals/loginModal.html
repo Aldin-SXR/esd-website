@@ -1,20 +1,41 @@
-<link rel="stylesheet"  type="text/css" href="views/user/modals/loginModal.css">
 <div class="modal-header">
     <div class="modal-title" id="modal-title">
         Log in
     </div>
 </div>
 <div class="modal-body">
-
+    <form name="loginForm" ng-submit="logIn()">
+        <div class="form-group">
+            <label for="email">Email address:</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-user"></i></div>
+                </div>
+                <input ng-model="loginData.email_address" type="email" name="email" class="form-control" id="email" placeholder="Enter your email"
+                    required>
+            </div>
+            <span style="color:red" ng-show="loginForm.email.$dirty && loginForm.email.$invalid">
+                <span ng-show="loginForm.email.$error.required"><small class="form-text">Email address is required.</small></span>
+                <span ng-show="loginForm.email.$error.email"><small class="form-text">Invalid email address.</small></span>
+            </span>
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-lock"></i></div>
+                </div>
+                <input ng-model="loginData.password" type="password" name="password" class="form-control" id="password" placeholder="Enter your password"
+                    required>
+            </div>
+            <span style="color: red;" ng-show="loginForm.password.$dirty && loginForm.password.$invalid">
+                <small class="form-text">Password is required.</small>
+            </span>
+        </div>
+        <button style="float: right;" type="submit" ng-click="logIn()" class="btn btn-success" ng-disabled="(loginForm.email.$dirty && loginForm.email.$invalid) || (loginForm.password.$dirty && loginForm.password.$invalid) || loading">
+            <span ng-show="!loading">Log In</span>
+            <span ng-show="loading"><i class="fa fa-spinner fa-spin"></i>&nbsp;Logging in...</span>
+        </button>
+    </form>
 </div>
-<!-- <div class="modal-footer">
-        <button ng-hide="movie._id" class="btn btn-success" ng-click="submitMovie(movie)">
-            Add
-        </button>
-        <button ng-show="movie._id" class="btn btn-success" ng-click="updateMovie(movie)">
-            Update
-        </button>
-        <button class="btn btn-danger" ng-click="cancel()">
-            Close
-        </button>
-    </div> -->

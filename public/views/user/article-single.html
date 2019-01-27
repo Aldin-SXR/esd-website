@@ -1,0 +1,70 @@
+<!-- Page info -->
+<div class="page-info-section set-bg" ng-style="{ 'background-image': 'url(img/page-bg/about_page.jpg)' }"
+    ng-controller="singleArticleController">
+    <div class="container">
+        <div class="site-breadcrumb">
+            <a href="#!news">News</a>
+            <span>{{ article.title }}</span>
+        </div>
+    </div>
+</div>
+<!-- Page info end -->
+
+<!-- single course section -->
+<section class="single-course spad pb-0" ng-controller="singleArticleController">
+    <div class="container">
+        <div class="course-meta-area">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    <div class="course-note">{{ article.published_at }}</div>
+                    <h3>{{ article.title }}</h3>
+                    <div class="course-metas">
+                        <div class="course-meta">
+                            <!-- <div class="post-author" ng-style="{'background-image': 'url(' + article.author_picture + ')'}"></div> -->
+                            <div class="course-author">
+                                <!-- <img class="post-author author-img" src="{{ article.author_picture }}"> -->
+                                <h6>Author</h6>
+                                <p>{{ article.author_name }}, <span>{{ article.author_title }}</span></p>
+                            </div>
+                        </div>
+                        <div class="course-meta">
+                            <div class="cm-info">
+                                <h6>Category</h6>
+                                <p>{{ article.category_name }}</p>
+                            </div>
+                        </div>
+                        <!-- <div class="course-meta">
+                            <div class="cm-info">
+                                <h6>Students</h6>
+                                <p>120 Registered Students</p>
+                            </div>
+                        </div>
+                        <div class="course-meta">
+                            <div class="cm-info">
+                                <h6>Reviews</h6>
+                                <p>2 Reviews <span class="rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star is-fade"></i>
+                                    </span></p>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <img ng-hide="article.image == 'img/no_image_available.png'" src="{{ article.image }}"
+                alt="{{ article.description }}" class="course-preview">
+        </div>
+        <div style="margin-top: 2%;" class="row">
+            <div class="col-lg-10 offset-lg-1 course-list">
+                <div ng-bind-html="article.content">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- single course section end -->

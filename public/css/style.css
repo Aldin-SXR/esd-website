@@ -1791,13 +1791,13 @@ ol {
 		margin-top: 5%;
 	}
 }
-
+/* 
 .left.carousel-control {background-image: none}
 .glyphicon-chevron-left, .glyphicon-chevron-right { color: #000 }
 .right.carousel-control {background-image: none }
 .carousel-indicators li { 
 	border: 1px solid #000
-}
+} */
 
 .item .text-center {
 	text-align: left !important;

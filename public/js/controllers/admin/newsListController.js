@@ -1,4 +1,4 @@
-const newsListController = ($scope, $http, $location) => {
+const newsListController = ($scope, $http, $location, $uibModal, toastr, $rootScope) => {
     $scope.limit = "5";
     $scope.start = "0";
     $scope.page = 1;
@@ -10,6 +10,41 @@ const newsListController = ($scope, $http, $location) => {
             $scope.totalItems = response.data.numOfNews;
         }, (error) => {
             console.log(error);
+        });
+    }
+
+    /* Listen for news updates */
+    $rootScope.$on("newsListUpdate", (event, data) => {
+        $scope.getNews();
+    });
+
+    $scope.openDeleteModal = (data) => {
+        let modal = $uibModal.open({
+            animation: true,
+            ariaLabelledBy: "modal-title",
+            ariaDescribedBy: "modal-body",
+            templateUrl: "views/admin/modals/deleteModal.html",
+            controller: ($scope, $uibModalInstance, $http, data, $rootScope) => {
+                $scope.article = data;
+                $scope.deleteArticle = (article) => {
+                    $http.delete("/private/news/" + article._id, HTTP_CONFIG).then(response => {
+                        toastr.success(response.data.message, "Successful deletion");
+                        $uibModalInstance.close();
+                        $rootScope.$emit("newsListUpdate", [ ]);
+                    }, error => {
+                        toastr.error("There has been an error while deleting the article.", "Unknown error");
+                    });
+                }
+                $scope.cancel = () => {
+                    $uibModalInstance.dismiss("cancel");
+                }
+            },
+            size: "md",
+            resolve: {
+                data: () => {
+                    return data;
+                }
+            }
         });
     }
 
@@ -25,6 +60,10 @@ const newsListController = ($scope, $http, $location) => {
 
     $scope.writeNewArticle = () => {
         $location.path("/news/new");
+    }
+
+    $scope.editArticle = (id) => {
+        $location.path("/news/edit/" + id);
     }
 
     /* Default call */

@@ -73,34 +73,35 @@
     <div class="container">
         <div class="section-title mb-0">
             <h2>Latest news</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at
-                rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+            <p>Read all the latest news and updates regarding the IBU ESD Club's current and upcoming work.</p>
         </div>
     </div>
-    <div class="course-warp">
+    <div class="course-warp" ng-controller="latestNewsController">
         <ul class="course-filter controls">
-            <li class="control active" data-filter="all">All</li>
-            <li class="control" data-filter=".finance">Workshops</li>
-            <li class="control" data-filter=".design">Events</li>
-            <li class="control" data-filter=".web">Seminars</li>
-            <li class="control" data-filter=".photo">Other Activities</li>
+            <li class="control" data-filter="all" ng-click="changeCategory('')" ng-class="{'active': category_id == ''}">All</li>
+            <li class="control" ng-repeat="category in news_categories" ng-class="{'active': category_id == category._id}" ng-click="changeCategory(category._id)">{{ category.name }}</li>
         </ul>
-        <div class="row course-items-area" ng-controller="newsController">
-            <!-- course -->
+        <div class="row course-items-area justify-content-center">
+            <!-- news -->
+            <div ng-show="!news.length">
+                <p>
+                    No news available in this category.
+                </p>
+            </div>
             <div ng-repeat="info in news" class="mix col-lg-3 col-md-4 col-sm-6 finance">
                 <div class="course-item">
                     <div class="course-thumb set-bg" ng-style="{ 'background-image': 'url({{ info.image }})' }">
-                        <div class="price">{{ info.date }}</div>
+                        <div class="price">{{ info.published_at }}</div>
                     </div>
                     <div class="course-info">
                         <div class="course-text">
-                            <h5>{{ info.title }}</h5>
+                            <h5 title="Open article" class="open-article" ng-click="openArticle(info._id)">{{ info.title }}</h5>
                             <p>{{ info.description }}</p>
-                            <div class="students">120 Students</div>
+                            <!-- <div class="students">120 Students</div> -->
                         </div>
                         <div class="course-author">
-                            <div class="ca-pic set-bg" ng-style="{ 'background-image': 'url({{ info.authorImage }})' }"></div>
-                            <p>{{ info.authorName }}, <span>{{ info.authorTitle }}</span></p>
+                            <div class="ca-pic set-bg" ng-style="{ 'background-image': 'url({{ info.author_picture }})' }"></div>
+                            <p>{{ info.author_name }}, <span>{{ info.author_title }}</span></p>
                         </div>
                     </div>
                 </div>
@@ -109,44 +110,12 @@
     </div>
 </section>
 <!-- course section end -->
-
-
-<!-- signup section -->
-<section class="signup-section spad">
-    <div class="signup-bg set-bg" ng-style="{ 'background-image': 'url(img/signup-bg.jpg)' }"></div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="signup-warp">
-                    <div class="section-title text-white text-left">
-                        <h2>Sign up to became a teacher</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at
-                            rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
-                    </div>
-                    <!-- signup form -->
-                    <form class="signup-form">
-                        <input type="text" placeholder="Your Name">
-                        <input type="text" placeholder="Your E-mail">
-                        <input type="text" placeholder="Your Phone">
-                        <label for="v-upload" class="file-up-btn">Upload Course</label>
-                        <input type="file" id="v-upload">
-                        <button class="site-btn">Search Couse</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- signup section end -->
-
-
 <!-- banner section -->
 <section class="banner-section spad">
     <div class="container">
         <div class="section-title mb-0 pb-2">
-            <h2>Join Our Community Now!</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at
-                rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+            <h2>Join Our Club Now!</h2>
+            <p>Become a part of a large family of embedded systems enthusiasts, and gain access to our workshops, activities and educational materials.</p>
         </div>
         <div class="text-center pt-5">
             <a href="#" class="site-btn">Register Now</a>

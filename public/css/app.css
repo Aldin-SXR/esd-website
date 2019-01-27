@@ -16,3 +16,11 @@
   -webkit-transition: opacity 0.5s;
   opacity: 0;
 }
+
+.category-link {
+  cursor: pointer;
+}
+
+.open-article {
+  cursor: pointer;
+}

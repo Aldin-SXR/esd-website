@@ -1,12 +1,12 @@
 <div class="content">
     <div class="container-fluid" ng-controller="newsListController">
         <div class="row justify-content-between">
-                <div class="col-md-2">
-                        <button class="btn btn-primary" ng-click="writeNewArticle()">
-                                <i class="material-icons">assignment</i>&nbsp;
-                            Write a post
-                        </button>
-                    </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary" ng-click="writeNewArticle()">
+                    <i class="material-icons">assignment</i>&nbsp;
+                    Write a post
+                </button>
+            </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="pageSize">Page size:</label>
@@ -46,6 +46,9 @@
                                         Author
                                     </th>
                                     <th>
+                                        Last edited at:
+                                    </th>
+                                    <th>
                                         Actions
                                     </th>
                                 </thead>
@@ -66,11 +69,15 @@
                                         <td>
                                             {{ news.author_name }}
                                         </td>
+                                        <td>
+                                            {{ news.last_edited_at }}
+                                        </td>
                                         <td class="td-actions text-left">
-                                            <button type="button" rel="tooltip" title="Edit" class="btn btn-primary btn-link btn-sm">
+                                            <button type="button" rel="tooltip" title="Edit" class="btn btn-primary btn-link btn-sm"
+                                                ng-click="editArticle(news._id)">
                                                 <i class="material-icons">edit</i>
                                             </button>
-                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
+                                            <button ng-click="openDeleteModal(news)" type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
                                                 <i class="material-icons">close</i>
                                             </button>
                                         </td>
