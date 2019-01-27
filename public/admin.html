@@ -13,7 +13,7 @@
 	<!--     Fonts and icons     -->
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
 	<link rel="stylesheet" href="admin-assets/assets/css/custom-admin-css.css">
 	<!-- CSS Files -->
 	<link href="admin-assets/assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
@@ -33,6 +33,20 @@
 </head>
 
 <body ng-app="esd-admin-app">
+	<!-- Page Preloder -->
+	<div ng-hide="pageLoaded" id="preloader">
+		<div class="loader"></div>
+	</div>
+	<script type="text/javascript">
+		window.addEventListener("load", function (event) {
+			/* Delete the preloader element */
+			var element = document.getElementById("preloader").className += " faded";
+			setTimeout(() => {
+				var element = document.getElementById("preloader");
+				element.parentNode.removeChild(element);
+			}, 500);
+		});
+	</script>
 	<div class="wrapper ">
 		<div class="sidebar" data-color="azure" data-background-color="white" data-image="admin-assets/assets/img/sidebar-1.jpg">
 			<!--
@@ -41,7 +55,7 @@
         Tip 2: you can also add an image using data-image tag
     -->
 			<div class="logo">
-				<a href="http://www.creative-tim.com" class="simple-text logo-normal">
+				<a href="#!/" class="simple-text logo-normal">
 					<img style="height: 100px; width: auto;" src="img/embedded_logo.png">
 				</a>
 			</div>
@@ -108,8 +122,8 @@
 									</p>
 								</a>
 								<div uib-dropdown-menu class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-									<a class="dropdown-item" href="#">Profile</a>
-									<a class="dropdown-item" href="#">Log out</a>
+									<span class="dropdown-item">Profile</span>
+									<span class="dropdown-item" ng-click="logOut()">Log out</span>
 								</div>
 							</li>
 						</ul>
@@ -159,6 +173,8 @@
 	<script src="js/controllers/admin/membersListController.js"></script>
 	<script src="js/controllers/admin/newsListController.js"></script>
 	<script src="js/controllers/admin/newsWriteController.js"></script>
+	<script src="js/controllers/admin/dashboardController.js"></script>
 	<script src="js/admin-app.js"></script>
 	<script src="js/Config.js"></script>
+
 </html>

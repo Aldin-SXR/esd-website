@@ -1,0 +1,95 @@
+<div class="modal-header">
+    <div class="modal-title" id="modal-title">
+        Register
+    </div>
+</div>
+<div class="modal-body">
+    <form name="signupForm" ng-submit="signUp()">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="name">Name and surname:</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fa fa-user"></i></div>
+                        </div>
+                        <input ng-model="registerData.name" type="text" name="name" class="form-control" id="name"
+                            placeholder="Enter your name and surname" required>
+                    </div>
+                    <span style="color: red;" ng-show="signupForm.name.$dirty && signupForm.name.$invalid">
+                        <small class="form-text">Name is required.</small>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="email">Email address:</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fa fa-user"></i></div>
+                        </div>
+                        <input ng-model="registerData.email_address" type="email" name="email" class="form-control" id="email"
+                            placeholder="Enter your email" required>
+                    </div>
+                    <span style="color:red" ng-show="signupForm.email.$dirty && signupForm.email.$invalid">
+                        <span ng-show="signupForm.email.$error.required"><small class="form-text">Email address is
+                                required.</small></span>
+                        <span ng-show="signupForm.email.$error.email"><small class="form-text">Invalid email address.</small></span>
+                    </span>
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fa fa-lock"></i></div>
+                        </div>
+                        <input ng-model="registerData.password" type="password" name="password" class="form-control" id="password"
+                            placeholder="Enter your password" required minlength="8" maxlength="24">
+                    </div>
+                    <span style="color: red;" ng-show="signupForm.password.$dirty && signupForm.password.$invalid">
+                        <span ng-show="signupForm.password.$error.required"><small class="form-text">Password is
+                                required.</small></span>
+                        <span ng-show="signupForm.password.$error.minlength"><small class="form-text">Password should
+                                contain at least 8 characters.</small></span>
+                        <span ng-show="signupForm.password.$error.maxlength"><small class="form-text">Password should
+                                not contain more than 24 characters.</small></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="bmd-label-floating">Department:</label>
+                <ui-select ng-model="selectedDepartment.value" theme="selectize">
+                    <ui-select-match>
+                        <span ng-bind="$select.selected.name"></span>
+                    </ui-select-match>
+                    <ui-select-choices repeat="item in (departments | filter: $select.search) track by item.id">
+                        <span ng-bind="item.name"></span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-6">
+                <label class="bmd-label-floating">Year:</label>
+                <ui-select ng-model="selectedYear.value" theme="selectize">
+                    <ui-select-match>
+                        <span ng-bind="$select.selected.year"></span>
+                    </ui-select-match>
+                    <ui-select-choices repeat="item in (years | filter: $select.search) track by item.id">
+                        <span ng-bind="item.year"></span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+        <button style="float: right; margin-top: 5%;" type="submit" ng-click="signUp()" class="btn btn-success"
+            ng-disabled="(signupForm.name.$dirty && signupForm.name.$invalid)  || (signupForm.email.$dirty && signupForm.email.$invalid) || (signupForm.password.$dirty && signupForm.password.$invalid) || loading">
+            <span ng-show="!loading">Sign Up</span>
+            <span ng-show="loading"><i class="fa fa-spinner fa-spin"></i>&nbsp;Logging in...</span>
+        </button>
+    </form>
+</div>

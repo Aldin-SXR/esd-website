@@ -24,7 +24,7 @@ app.use("/", (req, res, next) => {
                         res.status(401).send({ message: "Unauthorized access: " + error.message });
                     } else {
                         //TODO: Improve JWT sessions.
-                       next();
+                        next();
                     }
                 });
             } catch (e) {
@@ -33,8 +33,6 @@ app.use("/", (req, res, next) => {
         } else {
             res.status(401).send({ message: "Missing authorization header." });
         }
-        // 
-        console.log(authHeader);
     } else {
         next();
     }
@@ -57,15 +55,20 @@ app.get("/news", (req, res) => {
 app.post("/login", (req, res) => {
     /* Check for empty data */
     if (!req.body.email_address || !req.body.password) {
-        res.status(404).send({ message: "Invalid user credentials." });
+        res.status(400).send({ message: "Invalid user credentials." });
         return;
     }
-     db.collection("members").findOne({ email_address: req.body.email_address }, (error, user) => {
-         if (error) {
-             throw error;
-         }
-         /* Check whether an actual user has been found. */
-         if (user) {
+    db.collection("members").findOne({ email_address: req.body.email_address }, (error, user) => {
+        if (error) {
+            throw error;
+        }
+        /* Check whether an actual user has been found. */
+        if (user) {
+            /* Check if approved member */
+            if (!user.approved_at) {
+                res.status(401).send({ message: "Your membership has not been approved yet." });
+                return;
+            }
             /* Check for valid password */
             if (bcrypt.compareSync(req.body.password, user.password)) {
                 res.json({
@@ -79,10 +82,43 @@ app.post("/login", (req, res) => {
                 res.status(401).send({ message: "You have entered an invalid password." })
             }
             db.coll
-         } else {
-             res.status(404).send({ message: "This user does not exist." });
-         }
-     })
+        } else {
+            res.status(404).send({ message: "This user does not exist." });
+        }
+    })
+});
+
+app.post("/register", (req, res) => {
+    /* Check for empty data */
+    if (!req.body.email_address || !req.body.password || !req.body.name) {
+        res.status(400).send({ message: "Invalid registration data." });
+        return;
+    }
+    /* creating a new movie object in order to avoid adding uncessary fields later on */
+    let member = {
+        name: req.body.name,
+        email_address: req.body.email_address,
+        password: bcrypt.hashSync(req.body.password, 10),
+        department: req.body.department,
+        year: req.body.year,
+        registered_at: new Date()
+    }
+    /* Check for duplicates */
+    db.collection("members").findOne({ email_address: req.body.email_address }, { email_address: 1 }, (error, user) => {
+        if (error) {
+            throw error;
+        }
+        if (user) {
+            res.status(400).send({ message: "A member with this email address already exists." });
+        } else {
+            db.collection("members").insertOne(member, (error, result) => {
+                if (error) {
+                    throw error;
+                }
+                res.json({ success: true, message: "An administrator should approve your membership shortly." });
+            })
+        }
+    });
 });
 
 app.get("/leaders/short", (req, res) => {
@@ -108,7 +144,7 @@ app.get("/news/preview", (req, res) => {
     let limit = parseInt(req.query.limit);
     /* Take optional category ID */
     let category_id = req.query.category_id;
-    let query = { }
+    let query = {}
     if (category_id) {
         query = { category_id: category_id };
     }
@@ -117,13 +153,13 @@ app.get("/news/preview", (req, res) => {
             throw error;
         }
         if (!news.length) {
-            res.json([ ]);
+            res.json([]);
         }
         /* Match with authors */
         let categoryCounter = 0;
         let authorCounter = 0;
         news.forEach((info) => {
-            db.collection("members").find({ _id: ObjectID(info.author_id) }, { _id: 1, name: 1, title: 1,  picture: 1}).toArray((error, author) => {
+            db.collection("members").find({ _id: ObjectID(info.author_id) }, { _id: 1, name: 1, title: 1, picture: 1 }).toArray((error, author) => {
                 if (error) {
                     throw error;
                 }
@@ -142,7 +178,7 @@ app.get("/news/preview", (req, res) => {
                 if (error) {
                     throw error;
                 }
-                info.category_name= category[0].name
+                info.category_name = category[0].name
                 categoryCounter++;
                 if (categoryCounter == news.length && authorCounter == news.length) {
                     /* Return count of all news */
@@ -176,7 +212,7 @@ app.delete("/private/news/:id", (req, res) => {
             return console.log(error);
         }
         if (result.value) {
-           res.json({ success: true, message: "The article was successfully deleted." });
+            res.json({ success: true, message: "The article was successfully deleted." });
         } else {
             res.status(404).send({ status: "The article by the given ID was not found." });
         }
@@ -213,16 +249,16 @@ app.get("/news_categories", (req, res) => {
 /**
  * Admin/user endpoints
  */
-app.get("/private/members/preview", (req, res) => {
+app.get("/private/members/approved", (req, res) => {
     let start = parseInt(req.query.start);
     let limit = parseInt(req.query.limit);
-    db.collection("members").find({}, { name: 1, department: 1, year: 1, member_since: 1, superuser: 1 }).skip(start).limit(limit).toArray((error, members) => {
+    db.collection("members").find({ approved_at: { $exists: true } }, { name: 1, department: 1, year: 1, approved_at: 1, superuser: 1 }).skip(start).limit(limit).toArray((error, members) => {
         if (error) {
             throw error;
         }
-        for (let i = 0; i < members.length; i++) {
-             members[i].member_since = new Date((members[i].member_since).getHighBits() * 1000 ).toDateString();
-        } 
+        // for (let i = 0; i < members.length; i++) {
+        //     members[i].member_since = new Date((members[i].member_since).getHighBits() * 1000).toDateString();
+        // }
         /* Return count of all members */
         db.collection("members").count({}, (error, numOfMembers) => {
             if (error) {
@@ -234,6 +270,41 @@ app.get("/private/members/preview", (req, res) => {
             });
         })
     });
+});
+
+app.get("/private/members/pending", (req, res) => {
+    db.collection("members").find({ approved_at: { $exists: false } }, { name: 1, department: 1, year: 1}).toArray((error, members) => {
+        if (error) {
+            throw error;
+        }
+        res.json(members);
+    });
+});
+
+app.put("/private/members/approve/:id", (req, res) => {
+    db.collection("members").findOneAndUpdate({ _id: ObjectID(req.params.id) }, { $set: { approved_at: new Date() } }, (error, result) => {
+        if (error) {
+            throw error;
+        }
+        if (result.value) {
+            res.json({ success: true, message: "Membership successfully approved." });
+        } else {
+            res.status(404).send({ status: "The member by the given ID was not found." });
+        }
+    });
+});
+
+app.delete("/private/members/:id", (req, res) => {
+    db.collection("members").findAndRemove({ _id: ObjectID(req.params.id) }, (error, result) => {
+        if (error) {
+            throw error;
+        }
+        if (result.value) {
+            res.json({ success: true, message: "Membership successfully revoked." });
+        } else {
+            res.status(404).send({ status: "The member by the given ID was not found." });
+        }
+    })
 });
 
 app.post("/private/news", (req, res) => {
@@ -268,6 +339,33 @@ app.put("/private/news/:id", (req, res) => {
         } else {
             res.status(404).send({ status: "The article by the given ID was not found." });
         }
+    });
+});
+
+app.get("/private/members/approved/count", (req, res) => {
+    db.collection("members").count({approved_at: { $exists: true }}, (error, count) => {
+        if (error) {
+            throw error;
+        }
+        res.json({ count: count });
+    });
+});
+
+app.get("/private/members/pending/count", (req, res) => {
+    db.collection("members").count({approved_at: { $exists: false }}, (error, count) => {
+        if (error) {
+            throw error;
+        }
+        res.json({ count: count });
+    });
+});
+
+app.get("/private/news/count", (req, res) => {
+    db.collection("news").count({ }, (error, count) => {
+        if (error) {
+            throw error;
+        }
+        res.json({ count: count });
     });
 });
 

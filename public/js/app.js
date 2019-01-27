@@ -1,4 +1,4 @@
-const app = angular.module("esd-app", [ "ngAnimate", "ngSanitize", "ui.bootstrap", "ngRoute", "toastr"]);
+const app = angular.module("esd-app", [ "ngAnimate", "ngSanitize", "ui.bootstrap", "ngRoute", "toastr", "ui.select"]);
 
 app.config(($routeProvider) => {
     $routeProvider.when("/", {
@@ -29,3 +29,4 @@ app.controller("awardsController", awardsController);
 app.controller("loginController", loginController);
 app.controller("newsPreviewController", newsPreviewController);
 app.controller("singleArticleController", singleArticleController);
+app.controller("registerController", registerController);

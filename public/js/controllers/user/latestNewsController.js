@@ -11,9 +11,11 @@ const latestNewsController = ($scope, $http, $location, $window) => {
     /* */
     $scope.getLatestNews = (category) => {
         $http.get("/news/preview?start=0&limit=5&category_id=" + category).then((response) => {
-            for (let i = 0; i < response.data.news.length; i++) {
-                if (!response.data.news[i].image || response.data.news[i].image === "" || response.data.news[i].image === null) {
-                    response.data.news[i].image = "img/no_image_available.png";
+            if (response.data.news && response.data.news.length) {
+                for (let i = 0; i < response.data.news.length; i++) {
+                    if (!response.data.news[i].image || response.data.news[i].image === "" || response.data.news[i].image === null) {
+                        response.data.news[i].image = "img/no_image_available.png";
+                    }
                 }
             }
             $scope.news = response.data.news;

@@ -1,5 +1,56 @@
 <div class="content">
     <div class="container-fluid" ng-controller="membersListController">
+        <div ng-show="pendingMembers.length" class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-warning">
+                        <h4 class="card-title ">Pending Memberships</h4>
+                        <p class="card-category">View all pending club memberships.</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="text-primary">
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Department
+                                    </th>
+                                    <th>
+                                        Year
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="member in pendingMembers">
+                                        <td>
+                                            {{ member.name }}
+                                        </td>
+                                        <td>
+                                            {{ member.department }}
+                                        </td>
+                                        <td>
+                                            {{ member.year }}
+                                        </td>
+                                        <td class="td-actions text-left">
+                                            <button ng-click="approveMembership(member._id)" type="button" rel="tooltip" title="Approve" class="btn btn-primary btn-link btn-sm">
+                                                <i class="material-icons">check</i>
+                                            </button>
+                                            <button ng-click="openRejectModal(member)" type="button" rel="tooltip" title="Reject" class="btn btn-danger btn-link btn-sm">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row justify-content-end">
             <div class="col-md-2">
                 <div class="form-group">
@@ -61,7 +112,7 @@
                                             {{ member.year }}
                                         </td>
                                         <td>
-                                            {{ member.member_since }}
+                                            {{ member.approved_at }}
                                         </td>
                                         <td class="text-primary">
                                             <div class="form-check">

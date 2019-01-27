@@ -8,4 +8,9 @@ const adminLinksController = ($scope, $rootScope, $route) => {
 		let decoded_token = jwt_decode(localStorage.getItem("user_token"));
 		return decoded_token.name;
 	}
+
+	$scope.logOut = () => {
+		localStorage.removeItem("user_token");
+		window.location.href = "index.html";
+	}
 }

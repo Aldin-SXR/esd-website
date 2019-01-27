@@ -1,0 +1,16 @@
+<div class="modal-header">
+        <div class="modal-title" id="modal-title">
+           Reject membership for {{ member.name }}?
+        </div>
+    </div>
+    <div class="modal-body">
+        Are you sure you want to reject this membership?
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" ng-click="rejectMembership(member)">
+            Reject
+        </button>
+        <button class="btn btn-danger" ng-click="cancel()">
+            Cancel
+        </button>
+    </div>

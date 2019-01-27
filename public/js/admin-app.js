@@ -1,4 +1,4 @@
-const adminApp = angular.module("esd-admin-app", [ "ui.select", "ngAnimate", "ngSanitize", "ui.bootstrap", "ngRoute", "ui.tinymce", "toastr"]);
+const adminApp = angular.module("esd-admin-app", ["ui.select", "ngAnimate", "ngSanitize", "ui.bootstrap", "ngRoute", "ui.tinymce", "toastr"]);
 
 adminApp.config(($routeProvider) => {
     $routeProvider.when("/", {
@@ -24,7 +24,18 @@ adminApp.config(($routeProvider) => {
     })
 })
 
-adminApp.run(['$rootScope', ($rootScope) => {
+adminApp.run(['$rootScope', 'toastr', ($rootScope, toastr) => {
+    try {
+        let token = jwt_decode(localStorage.getItem("user_token"));
+        if (!token || (token && !token.superuser)) {
+            window.location.href = "index.html";
+            toastr.error("You are not authorized to access this page.", "Authorization error.");
+        }
+    } catch (e) {
+        window.location.href = "index.html";
+        toastr.error("You are not authorized to access this page.", "Authorization error.");
+    }
+
     $rootScope.$on('$routeChangeSuccess', (event, current, previous) => {
         $rootScope.viewTitle = current.$$route.viewTitle;
     });
@@ -37,3 +48,4 @@ adminApp.controller("adminLinksController", adminLinksController);
 adminApp.controller("membersListController", membersListController);
 adminApp.controller("newsListController", newsListController);
 adminApp.controller("newsWriteController", newsWriteController);
+adminApp.controller("dashboardController", dashboardController);
