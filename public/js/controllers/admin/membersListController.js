@@ -7,7 +7,6 @@ const membersListController = ($scope, $http, toastr, $uibModal, $rootScope) => 
     $scope.getPendingMembers = () => {
         $http.get("/private/members/pending", HTTP_CONFIG).then((response) => {
             $scope.pendingMembers = response.data;
-            console.log($scope.pendingMembers);
         }, (error) => {
             console.log(error);
         });
@@ -26,6 +25,9 @@ const membersListController = ($scope, $http, toastr, $uibModal, $rootScope) => 
 
     $scope.getMembers = (start, limit) => {
         $http.get("/private/members/approved?start=" + start + "&limit=" + limit, HTTP_CONFIG).then((response) => {
+            for (let i = 0; i < response.data.members.length; i++) {
+                response.data.members[i].approved_at = new Date(response.data.members[i].approved_at).toLocaleDateString();
+            }
             $scope.members = response.data.members;
             $scope.totalItems = response.data.numOfMembers;
         }, (error) => {
@@ -71,11 +73,21 @@ const membersListController = ($scope, $http, toastr, $uibModal, $rootScope) => 
         });
     }
 
+    $scope.pageSizes = [
+        { id: 1, size: 5 },
+        { id: 2, size: 10 },
+        { id: 3, size: 25 },
+        { id: 4, size: 50 }
+    ];
+
+    $scope.selectedSize = { value: $scope.pageSizes[0] };
+
     $scope.changePage = () => {
         $scope.getMembers(($scope.page - 1) * $scope.limit, $scope.limit);
     }
     
     $scope.changeLimit = function() {
+        $scope.limit = $scope.selectedSize.value.size;
         $scope.start = "0";
         $scope.page = 0;
         $scope.getMembers($scope.start, $scope.limit);

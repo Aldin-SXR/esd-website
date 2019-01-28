@@ -1,4 +1,4 @@
-const adminApp = angular.module("esd-admin-app", ["ui.select", "ngAnimate", "ngSanitize", "ui.bootstrap", "ngRoute", "ui.tinymce", "toastr"]);
+const adminApp = angular.module("esd-admin-app", ["ui.select", "ngAnimate", "ngSanitize", "ui.bootstrap", "ngRoute", "ui.tinymce", "toastr", "720kb.datepicker"]);
 
 adminApp.config(($routeProvider) => {
     $routeProvider.when("/", {
@@ -12,7 +12,7 @@ adminApp.config(($routeProvider) => {
     }).when("/news", {
         templateUrl: "views/admin/news-preview.html",
         activeTab: "news",
-        viewTitle: "News & Posts"
+        viewTitle: "News & Articles"
     }).when("/news/new", {
         templateUrl: "views/admin/news-write.html",
         activeTab: "news",
@@ -21,6 +21,18 @@ adminApp.config(($routeProvider) => {
         templateUrl: "views/admin/news-write.html",
         activeTab: "news",
         viewTitle: "Edit an Article"
+    }).when("/events", {
+        templateUrl: "views/admin/event-preview.html",
+        activeTab: "events",
+        viewTitle: "Events"
+    }).when("/events/new", {
+        templateUrl: "views/admin/event-create.html",
+        activeTab: "news",
+        viewTitle: "Create an Event"
+    }).when("/events/edit/:id", {
+        templateUrl: "views/admin/event-create.html",
+        activeTab: "news",
+        viewTitle: "Edit an Event"
     })
 })
 
@@ -49,3 +61,5 @@ adminApp.controller("membersListController", membersListController);
 adminApp.controller("newsListController", newsListController);
 adminApp.controller("newsWriteController", newsWriteController);
 adminApp.controller("dashboardController", dashboardController);
+adminApp.controller("eventsListController", eventsListController);
+adminApp.controller("eventsCreateController", eventsCreateController);

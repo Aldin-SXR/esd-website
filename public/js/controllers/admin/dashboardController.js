@@ -5,6 +5,12 @@ const dashboardController = ($scope, $http, $location, $window) => {
         console.log(error);
     });
 
+    $http.get("/private/events/count", HTTP_CONFIG).then(response => {
+        $scope.eventsCount = response.data.count;
+    }, error => {
+        console.log(error);
+    });
+
     $http.get("/private/members/approved/count", HTTP_CONFIG).then(response => {
         $scope.activeMembersCount = response.data.count;
     }, error => {
@@ -24,6 +30,11 @@ const dashboardController = ($scope, $http, $location, $window) => {
 
     $scope.goToMembers = () => {
         $location.path("/members");
+        $window.scrollTo(0, 0);
+    }
+
+    $scope.goToEvents = () => {
+        $location.path("/events");
         $window.scrollTo(0, 0);
     }
 }

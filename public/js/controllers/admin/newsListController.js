@@ -3,6 +3,15 @@ const newsListController = ($scope, $http, $location, $uibModal, toastr, $rootSc
     $scope.start = "0";
     $scope.page = 1;
     $scope.maxSize = 5;
+    
+    /* UI Select */
+    $scope.pageSizes = [
+        { id: 1, size: 5 },
+        { id: 2, size: 10 },
+        { id: 3, size: 25 },
+        { id: 4, size: 50 }
+    ];
+    $scope.selectedSize = { value: $scope.pageSizes[0] };
 
     $scope.getNews = (start, limit) => {
         $http.get("/news/preview?start=" + start + "&limit=" + limit).then((response) => {
@@ -53,6 +62,7 @@ const newsListController = ($scope, $http, $location, $uibModal, toastr, $rootSc
     }
     
     $scope.changeLimit = function() {
+        $scope.limit = $scope.selectedSize.value.size;
         $scope.start = "0";
         $scope.page = 0;
         $scope.getNews($scope.start, $scope.limit);

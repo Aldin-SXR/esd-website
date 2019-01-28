@@ -197,6 +197,115 @@ app.get("/news/preview", (req, res) => {
     });
 });
 
+app.get("/events/preview", (req, res) => {
+    let start = parseInt(req.query.start);
+    let limit = parseInt(req.query.limit);
+    /* Take optional category ID */
+    let category_id = req.query.category_id;
+    let completed = parseInt(req.query.completed);
+    let query = { completed: completed }
+    if (category_id) {
+        query.category_id =  category_id;
+    }
+    db.collection("events").find(query, { description: 0 }).skip(start).limit(limit).sort({ start_date: -1 }).toArray((error, events) => {
+        if (error) {
+            throw error;
+        }
+        if (!events.length) {
+            res.json([]);
+        }
+        let categoryCounter = 0;
+        /* Match with categories */
+        events.forEach((event) => {
+            db.collection("event_categories").find({ _id: ObjectID(event.category_id) }, { _id: 1, name: 1 }).toArray((error, category) => {
+                if (error) {
+                    throw error;
+                }
+                event.category_name = category[0].name
+                event.num_participants = event.enrolled_members.length;
+                categoryCounter++;
+                if (categoryCounter == events.length) {
+                    /* Return count of all news */
+                    db.collection("events").count(query, (error, numOfEvents) => {
+                        if (error) {
+                            throw error;
+                        }
+                        res.json({
+                            numOfEvents: numOfEvents,
+                            events: events
+                        });
+                    })
+                }
+            });
+        });
+    });
+});
+
+app.get("/events/:id", (req, res) => {
+    db.collection("events").findOne({ _id: ObjectID(req.params.id) }, (error, event) => {
+        if (error) {
+            throw error;
+        }
+        res.json(event);
+    });
+});
+
+app.post("/private/events", (req, res) => {
+    /* creating a new movie object in order to avoid adding uncessary fields later on */
+    let event = {
+        title: req.body.title,
+        description: req.body.description,
+        start_date: new Date(req.body.start_date),
+        end_date: new Date(req.body.end_date),
+        category_id: req.body.category_id,
+        enrolled_members: [ ],
+        completed: 0
+    }
+    db.collection("events").insertOne(event, (error, result) => {
+        if (error) {
+            return console.log(error);
+        }
+        res.json(result.ops[0]);
+    })
+});
+
+app.put("/private/events/:id", (req, res) => {
+    delete req.body._id;
+    db.collection("events").findOneAndUpdate({ _id: ObjectID(req.params.id) }, { $set: req.body }, (error, result) => {
+        if (error) {
+            throw error;
+        }
+        if (result.value) {
+            res.json({ success: true, message: "Successfully updated the event." });
+        } else {
+            res.status(404).send({ status: "The event by the given ID was not found." });
+        }
+    });
+});
+
+app.delete("/private/events/:id", (req, res) => {
+    db.collection("events").findAndRemove({ _id: ObjectID(req.params.id) }, (error, result) => {
+        if (error) {
+            return console.log(error);
+        }
+        if (result.value) {
+            res.json({ success: true, message: "The event was successfully deleted." });
+        } else {
+            res.status(404).send({ status: "The event by the given ID was not found." });
+        }
+    })
+});
+
+
+app.get("/event_categories", (req, res) => {
+    db.collection("event_categories").find().toArray((error, eventCategories) => {
+        if (error) {
+            throw error;
+        }
+        res.json(eventCategories);
+    });
+});
+
 app.get("/news/:id", (req, res) => {
     db.collection("news").findOne({ _id: ObjectID(req.params.id) }, (error, news) => {
         if (error) {
@@ -362,6 +471,15 @@ app.get("/private/members/pending/count", (req, res) => {
 
 app.get("/private/news/count", (req, res) => {
     db.collection("news").count({ }, (error, count) => {
+        if (error) {
+            throw error;
+        }
+        res.json({ count: count });
+    });
+});
+
+app.get("/private/events/count", (req, res) => {
+    db.collection("events").count({ completed: 0 }, (error, count) => {
         if (error) {
             throw error;
         }

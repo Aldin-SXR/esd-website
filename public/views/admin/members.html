@@ -55,12 +55,14 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="pageSize">Page size:</label>
-                    <select class="card-category form-control" id="pageSize" ng-model="limit" ng-change="changeLimit()">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                    </select>
+                    <ui-select ng-model="selectedSize.value" theme="selectize" ng-change="changeLimit()">
+                            <ui-select-match>
+                                <span ng-bind="$select.selected.size"></span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (pageSizes | filter: $select.search) track by item.id">
+                                <span ng-bind="item.size"></span>
+                            </ui-select-choices>
+                        </ui-select>
                 </div>
             </div>
         </div>

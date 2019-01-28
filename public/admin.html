@@ -30,6 +30,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.20.0/select.min.js"></script>
 	<script src="https://unpkg.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
 	<link rel="stylesheet" href="https://unpkg.com/angular-toastr/dist/angular-toastr.css" />
+	<link rel="stylesheet" href="css/angular-datepicker.min.css">
+	<script src="js/angular-datepicker.min.js"></script>
 </head>
 
 <body ng-app="esd-admin-app">
@@ -67,12 +69,6 @@
 							<p>Dashboard</p>
 						</a>
 					</li>
-					<li class="nav-item ">
-						<a class="nav-link" href="./user.html">
-							<i class="material-icons">person</i>
-							<p>User Profile</p>
-						</a>
-					</li>
 					<li class="nav-item" ng-class="{'active': activeTab == 'members'}">
 						<a class="nav-link" href="#!members">
 							<i class="material-icons">content_paste</i>
@@ -85,10 +81,16 @@
 							<p>News</p>
 						</a>
 					</li>
-					<li class="nav-item ">
-						<a class="nav-link" href="./rtl.html">
+					<li class="nav-item " ng-class="{'active': activeTab == 'events'}">
+						<a class="nav-link" href="#!events">
 							<i class="material-icons">language</i>
 							<p>Events</p>
+						</a>
+					</li>
+					<li class="nav-item ">
+						<a class="nav-link" href="./user.html">
+							<i class="material-icons">person</i>
+							<p>Profile</p>
 						</a>
 					</li>
 				</ul>
@@ -174,6 +176,8 @@
 	<script src="js/controllers/admin/newsListController.js"></script>
 	<script src="js/controllers/admin/newsWriteController.js"></script>
 	<script src="js/controllers/admin/dashboardController.js"></script>
+	<script src="js/controllers/admin/eventsListController.js"></script>
+	<script src="js/controllers/admin/eventsCreateController.js"></script>
 	<script src="js/admin-app.js"></script>
 	<script src="js/Config.js"></script>
 

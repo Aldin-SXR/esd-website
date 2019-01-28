@@ -1,0 +1,189 @@
+<div class="content">
+    <div class="container-fluid" ng-controller="eventsListController">
+        <div class="row justify-content-between">
+            <div class="col-md-2">
+                <button class="btn btn-primary" ng-click="createNewEvent()">
+                    <i class="material-icons">assignment</i>&nbsp;
+                    Create an event
+                </button>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="pageSize">Page size:</label>
+                    <ui-select ng-model="selectedSize.value" theme="selectize" ng-change="changeLimit()">
+                        <ui-select-match>
+                            <span ng-bind="$select.selected.size"></span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in (pageSizes | filter: $select.search) track by item.id">
+                            <span ng-bind="item.size"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Active Events</h4>
+                        <p class="card-category">Preview a list of all active events</p>
+                    </div>
+                    <div class="card-body">
+                        <div ng-show="eventsPreview.length" class="table-responsive">
+                            <table class="table">
+                                <thead class="text-primary">
+                                    <!-- <th>
+                                                    ID
+                                                </th> -->
+                                    <th>
+                                        Title
+                                    </th>
+                                    <th>
+                                        Category
+                                    </th>
+                                    <th>
+                                        Start date:
+                                    </th>
+                                    <th>
+                                        End date:
+                                    </th>
+                                    <th>
+                                        Number of participants:
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="event in eventsPreview">
+                                        <td>
+                                            {{ event.title }}
+                                        </td>
+                                        <td>
+                                            {{ event.category_name }}
+                                        </td>
+                                        <td>
+                                            {{ event.start_date }}
+                                        </td>
+                                        <td>
+                                            {{ event.end_date }}
+                                        </td>
+                                        <td>
+                                            <p uib-popover="{{ event.enrolled_members }}" popover-trigger="'mouseenter'"
+                                                popover-placement="bottom">
+                                                {{ event.num_participants }}
+                                            </p>
+                                        </td>
+                                        <td class="td-actions text-left">
+                                            <button ng-click="markAsCompleted(event)" type="button" rel="tooltip" title="Mark as completed"
+                                                class="btn btn-info btn-link btn-sm">
+                                                <i class="material-icons">assignment_turned_in</i>
+                                            </button>
+                                            <button type="button" rel="tooltip" title="Edit" class="btn btn-primary btn-link btn-sm"
+                                                ng-click="editEvent(event._id)">
+                                                <i class="material-icons">edit</i>
+                                            </button>
+                                            <button ng-click="openDeleteModal(event)" type="button" rel="tooltip" title="Remove"
+                                                class="btn btn-danger btn-link btn-sm">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div ng-show="!eventsPreview.length">
+                            <p>
+                                There are no available events.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-start">
+            <div class="col-md-3">
+                <ul uib-pagination items-per-page="limit" force-ellipses="true" total-items="totalActiveItems" max-size="maxSize"
+                    ng-model="page" ng-change="changeActivePage()">
+                </ul>
+            </div>
+        </div>
+        <!-- Completed events -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Completed Events</h4>
+                        <p class="card-category">Preview a list of all completed events</p>
+                    </div>
+                    <div class="card-body">
+                        <div ng-show="completedEvents.length" class="table-responsive">
+                            <table class="table">
+                                <thead class="text-primary">
+                                    <th>
+                                        Title
+                                    </th>
+                                    <th>
+                                        Category
+                                    </th>
+                                    <th>
+                                        Start date:
+                                    </th>
+                                    <th>
+                                        End date:
+                                    </th>
+                                    <th>
+                                        Number of participants:
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="event in completedEvents">
+                                        <td>
+                                            {{ event.title }}
+                                        </td>
+                                        <td>
+                                            {{ event.category_name }}
+                                        </td>
+                                        <td>
+                                            {{ event.start_date }}
+                                        </td>
+                                        <td>
+                                            {{ event.end_date }}
+                                        </td>
+                                        <td>
+                                            <p uib-popover="{{ event.enrolled_members }}" popover-trigger="'mouseenter'"
+                                                popover-placement="bottom">
+                                                {{ event.num_participants }}
+                                            </p>
+                                        </td>
+                                        <td class="td-actions text-left">
+                                            <button ng-click="openDeleteModal(event)" type="button" rel="tooltip" title="Remove"
+                                                class="btn btn-danger btn-link btn-sm">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div ng-show="!completedEvents.length">
+                            <p>
+                                There are no available events.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-start">
+            <div class="col-md-3">
+                <ul uib-pagination items-per-page="limit" force-ellipses="true" total-items="totalCompletedItems"
+                    max-size="maxSize" ng-model="page" ng-change="changeCompletedPage()">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
