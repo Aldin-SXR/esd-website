@@ -56,25 +56,21 @@
             <h2>Club Leadership</h2>
             <br>
         </div>
-        <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
-            <div uib-slide ng-repeat="member in members track by $index" index="$index">
-                <div class="row justify-content-center member-card">
-                    <div class="col-xs-12 col-md-8">
-                        <div class="row justify-content-center">
-                            <div class="col-xs-12 col-md-4 center-content">
-                                <img class="about-img" src="{{ member.picture }}">
-                            </div>
-                            <div class="col-md-8 center-content">
-                                <h4 class="member-title">{{ member.name }}</h4>
-                                <h5>{{ member.title }} &nbsp;
-                                    <a href="{{ member.social_links.linkedin }}"><i title="LinkedIn profile" class="fa fa-linkedin"></i></a>
-                                </h5>
-                                <br>
-                                <p>
-                                    {{ member.short_bio }}
-                                </p>
-                            </div>
-                        </div>
+        <div class="row justify-content-center">
+            <div style="margin-bottom: 10px;" ng-repeat="member in members" class="col-xs-12 col-md-8">
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-md-4 center-content">
+                        <img class="about-img" src="{{ member.picture }}">
+                    </div>
+                    <div class="col-md-8 center-content">
+                        <h4 class="member-title">{{ member.name }}</h4>
+                        <h5>{{ member.title }} &nbsp;
+                            <a href="{{ member.social_links.linkedin }}"><i title="LinkedIn profile" class="fa fa-linkedin"></i></a>
+                        </h5>
+                        <br>
+                        <p>
+                            {{ member.short_bio }}
+                        </p>
                     </div>
                 </div>
             </div>

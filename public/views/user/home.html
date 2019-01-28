@@ -29,7 +29,7 @@
         </div>
         <div class="row">
             <!-- categorie -->
-            <!-- <div ng-repeat="info in news" class="col-lg-4 col-md-6">
+<!-- <div ng-repeat="info in news" class="col-lg-4 col-md-6">
                 <div class="categorie-item">
                     <div class="ci-thumb set-bg" ng-style="{ 'background-image': 'url({{ info.image }})' }"></div>
                     <div class="ci-text">
@@ -55,7 +55,7 @@
             <div class="row">
                 <div class="col-md-10 offset-md-1">
                     <!-- search form -->
-                    <!-- <form class="course-search-form">
+<!-- <form class="course-search-form">
                         <input type="text" placeholder="Course">
                         <input type="text" class="last-m" placeholder="Category">
                         <button class="site-btn">Search Couse</button>
@@ -70,6 +70,46 @@
 
 <!-- course section -->
 <section class="course-section spad">
+    <!-- Events -->
+    <div class="container">
+        <div class="section-title mb-0">
+            <h2>Latest events</h2>
+            <p>Find out more about the Club's latest workshop, competitions and other activities.</p>
+        </div>
+    </div>
+    <div class="course-warp" ng-controller="latestEventsController" style="margin-bottom: 2%;">
+        <ul class="course-filter controls">
+            <li class="control" data-filter="all" ng-click="changeCategory('')" ng-class="{'active': category_id == ''}">All</li>
+            <li class="control" ng-repeat="category in event_categories" ng-class="{'active': category_id == category._id}"
+                ng-click="changeCategory(category._id)">{{ category.name }}</li>
+        </ul>
+        <div class="row course-items-area justify-content-center">
+            <!-- news -->
+            <div ng-show="!events.length">
+                <p>
+                    No active events available in this category.
+                </p>
+            </div>
+            <div ng-repeat="event in events" class="mix col-lg-3 col-md-4 col-sm-6 finance">
+                <div class="card">
+                    <div class="card-header">
+                            <span class="badge badge-primary">{{ event.start_date }}</span>
+                            -
+                            <span class="badge badge-danger">{{ event.end_date }}</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ event.title }}</h5>
+                        <p class="card-text" ng-bind-html="event.description | limitHtml : 100:'...' | trustAsHtml"></p>
+                        <button class="btn btn-primary" ng-click="openEvent(event._id)">See more</button>
+                    </div>
+                    <div class="card-footer text-muted">
+                        Category: {{ event.category_name }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- News  -->
     <div class="container">
         <div class="section-title mb-0">
             <h2>Latest news</h2>
@@ -79,7 +119,8 @@
     <div class="course-warp" ng-controller="latestNewsController">
         <ul class="course-filter controls">
             <li class="control" data-filter="all" ng-click="changeCategory('')" ng-class="{'active': category_id == ''}">All</li>
-            <li class="control" ng-repeat="category in news_categories" ng-class="{'active': category_id == category._id}" ng-click="changeCategory(category._id)">{{ category.name }}</li>
+            <li class="control" ng-repeat="category in news_categories" ng-class="{'active': category_id == category._id}"
+                ng-click="changeCategory(category._id)">{{ category.name }}</li>
         </ul>
         <div class="row course-items-area justify-content-center">
             <!-- news -->
@@ -95,7 +136,8 @@
                     </div>
                     <div class="course-info">
                         <div class="course-text">
-                            <h5 title="Open article" class="open-article" ng-click="openArticle(info._id)">{{ info.title }}</h5>
+                            <h5 title="Open article" class="open-article" ng-click="openArticle(info._id)">{{
+                                info.title }}</h5>
                             <p>{{ info.description }}</p>
                             <!-- <div class="students">120 Students</div> -->
                         </div>
@@ -115,7 +157,8 @@
     <div class="container">
         <div class="section-title mb-0 pb-2">
             <h2>Join Our Club Now!</h2>
-            <p>Become a part of a large family of embedded systems enthusiasts, and gain access to our workshops, activities and educational materials.</p>
+            <p>Become a part of a large family of embedded systems enthusiasts, and gain access to our workshops,
+                activities and educational materials.</p>
         </div>
         <div class="text-center pt-5">
             <button class="site-btn" ng-click="openRegisterModal()">Register Now</button>

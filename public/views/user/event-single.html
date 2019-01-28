@@ -1,0 +1,54 @@
+<!-- Page info -->
+<div class="page-info-section set-bg" ng-style="{ 'background-image': 'url(img/page-bg/about_page.jpg)' }"
+    ng-controller="singleEventController">
+    <div class="container">
+        <div class="site-breadcrumb">
+            <a href="#!events">Events</a>
+            <span>{{ event.title }}</span>
+        </div>
+    </div>
+</div>
+<!-- Page info end -->
+
+<!-- single course section -->
+<section class="single-course spad pb-0" ng-controller="singleEventController">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="badge badge-primary">{{ event.start_date }}</span>
+                        -
+                        <span class="badge badge-danger">{{ event.end_date }}</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ event.title }}</h5>
+                        <p class="card-text" ng-bind-html="event.description"></p>
+                        <button ng-show="authorized" ng-click="applyForEvent(event._id)" class="btn btn-success"
+                            ng-disabled="loading || enrolled">
+                            <span ng-show="!loading && !enrolled">Apply</span>
+                            <span ng-show="loading"><i class="fa fa-spinner fa-spin"></i>&nbsp;Applying...</span>
+                            <span ng-show="!loading && enrolled">Already enrolled</span>
+                        </button>
+                        <button ng-show="authorized && enrolled" ng-click="cancelApplication(event._id)" class="btn btn-danger"
+                            ng-disabled="loading">
+                            <span ng-show="!loading && enrolled">Cancel application</span>
+                            <span ng-show="loading"><i class="fa fa-spinner fa-spin"></i>&nbsp;Cancelling...</span>
+                        </button>
+                        <span ng-show="!authorized" class="text-muted">You need to be logged in to apply.</span>
+                    </div>
+                    <div class="card-footer text-muted">
+                        Category: {{ event.category_name }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 2%;" class="row">
+            <div class="col-lg-10 offset-lg-1 course-list">
+                <div ng-bind-html="article.content">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- single course section end -->

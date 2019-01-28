@@ -4,6 +4,7 @@ const { ObjectID } = require("mongodb");
 const bodyParser = require("body-parser");
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
+const nodeMailer = require("nodemailer");
 const Config = require("./Config");
 
 let db;
@@ -121,6 +122,42 @@ app.post("/register", (req, res) => {
     });
 });
 
+app.post("/contact", (req, res) => {
+    /* Check for empty data */
+    if (!req.body.email_address || !req.body.message || !req.body.name) {
+        res.status(400).send({ message: "Invalid contact data." });
+        return;
+    }
+
+    /* Set up mailing server */
+    let transporter = nodeMailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false,
+        requireTLS: true,
+        auth: Config.MAIL_AUTH
+    });
+
+    /* Set up mail */
+    let mailOptions = {
+        from: "no-reply@esdclub.com",
+        to: Config.MAIL_AUTH.user,
+        subject: "IBU ESD | New message from contact form",
+        html:  "<b>Name: </b>" + req.body.name + "<br><b>Email address: </b>" + req.body.email_address + "<br><b>Subject: </b>" + 
+        req.body.subject + "<br><hr><em>Message: </em><br>" + req.body.message
+    }
+
+    /* Send mail */
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            res.status(400).send({ message: "Unkown mailing error." });
+            throw error;
+        }
+        res.json({ success: true, message: "Message successfully sent." });
+        // console.log("Email sent: " + info.response);
+    });
+});
+
 app.get("/leaders/short", (req, res) => {
     db.collection("members").find({ superuser: true }).toArray((error, members) => {
         if (error) {
@@ -207,7 +244,7 @@ app.get("/events/preview", (req, res) => {
     if (category_id) {
         query.category_id =  category_id;
     }
-    db.collection("events").find(query, { description: 0 }).skip(start).limit(limit).sort({ start_date: -1 }).toArray((error, events) => {
+    db.collection("events").find(query, { }).skip(start).limit(limit).sort({ start_date: -1 }).toArray((error, events) => {
         if (error) {
             throw error;
         }
@@ -328,6 +365,74 @@ app.delete("/private/news/:id", (req, res) => {
     })
 });
 
+app.put("/private/events/:id/apply", (req, res) => {
+    delete req.body._id;
+    db.collection("events").findOneAndUpdate({ _id: ObjectID(req.params.id) }, { $addToSet: { enrolled_members: req.body.member_name } }, (error, result) => {
+        if (error) {
+            throw error;
+        }
+        if (result.value) {
+            res.json({ success: true, message: "Successfully applied for the event." });
+        } else {
+            res.status(404).send({ status: "The event by the given ID was not found." });
+        }
+    });
+});
+
+app.post("/private/events/applications", (req, res) => {
+    db.collection("events").find({ }, { _id: 1, title: 1, enrolled_members: 1 }).toArray((error, events) => {
+        if (error) {
+            throw error;
+        }
+        let eventList = [ ];
+        events.forEach(event => {
+            if (event.enrolled_members && event.enrolled_members.length) {
+                for (let i = 0; i < event.enrolled_members.length; i++) {
+                    if (event.enrolled_members[i] == req.body.member_name) {  
+                        eventList.push({
+                            _id: event._id,
+                            title: event.title
+                        });
+                        break;
+                    }
+                }
+            }
+        });
+        res.json(eventList);
+    });
+});
+
+app.put("/private/events/:id/cancel", (req, res) => {
+    delete req.body._id;
+    db.collection("events").findOneAndUpdate({ _id: ObjectID(req.params.id) }, { $pull: { enrolled_members: req.body.member_name } }, (error, result) => {
+        if (error) {
+            throw error;
+        }
+        if (result.value) {
+            res.json({ success: true, message: "Successfully cancelled event application." });
+        } else {
+            res.status(404).send({ status: "The event by the given ID was not found." });
+        }
+    });
+});
+
+app.post("/private/events/:id/check_application", (req, res) => {
+    db.collection("events").findOne({ _id: ObjectID(req.params.id) }, (error, event) => {
+        if (error) {
+            throw error;
+        }
+        if (event.enrolled_members && event.enrolled_members.length) {
+            for (let i = 0; i < event.enrolled_members.length; i++) {
+                if (event.enrolled_members[i] == req.body.member_name) {
+                    res.json({ enrolled: true });
+                    return;
+                }
+            }
+        }
+        res.json({ enrolled: false });
+    });
+});
+
 app.get("/author/:id", (req, res) => {
     db.collection("members").findOne({ _id: ObjectID(req.params.id) }, (error, author) => {
         if (error) {
@@ -339,6 +444,15 @@ app.get("/author/:id", (req, res) => {
 
 app.get("/category/:id", (req, res) => {
     db.collection("news_categories").findOne({ _id: ObjectID(req.params.id) }, (error, category) => {
+        if (error) {
+            throw error;
+        }
+        res.json(category);
+    });
+});
+
+app.get("/event_category/:id", (req, res) => {
+    db.collection("event_categories").findOne({ _id: ObjectID(req.params.id) }, (error, category) => {
         if (error) {
             throw error;
         }

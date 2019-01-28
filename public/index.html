@@ -29,6 +29,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular-animate.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular-sanitize.min.js"></script>
 	<script src="js/ui-bootstrap-tpls-3.0.6.min.js"></script>
+	<script src="js/jwt-decode.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.20.0/select.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.20.0/select.min.js"></script>
 	<script src="https://unpkg.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
@@ -64,12 +65,13 @@
 					</div>
 				</div>
 				<div class="col-lg-9 col-md-9" ng-controller="loginController">
-					<a href="" class="site-btn header-btn" ng-click="openLoginModal()">Login</a>
+					<button ng-show="!authorized" class="site-btn header-btn" ng-click="openLoginModal()">Log in</button>
+					<button ng-show="authorized" class="site-btn header-btn" ng-click="logOut()">Log out</button>
 					<nav class="main-menu">
 						<ul ng-controller="linksController">
 							<li><a ng-class="{'active': activeTab == 'home'}" href="#!/">Home</a></li>
 							<li><a ng-class="{'active': activeTab == 'about'}" href="#!about">About us</a></li>
-							<li><a href="courses.html">Courses</a></li>
+							<li><a ng-class="{'active': activeTab == 'events'}" href="#!events">Events</a></li>
 							<li><a ng-class="{'active': activeTab == 'news'}" href="#!news">News</a></li>
 							<li><a ng-class="{'active': activeTab == 'contact'}" href="#!contact">Contact</a></li>
 						</ul>
@@ -159,12 +161,13 @@
 	<script src="js/controllers/user/newsPreviewController.js"></script>
 	<script src="js/controllers/user/singleArticleController.js"></script>
 	<script src="js/controllers/user/registerController.js"></script>
+	<script src="js/controllers/user/latestEventsController.js"></script>
+	<script src="js/controllers/user/eventsPreviewController.js"></script>
+	<script src="js/controllers/user/singleEventController.js"></script>
+	<script src="js/controllers/user/contactController.js"></script>
 	<script src="js/app.js"></script>
+	<script src="js/Config.js"></script>
 	<!--====== Javascripts & Jquery ======-->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUsG1yD6CxrEzezDkdsSWYxDaXmIt29XA"></script>
-	<!-- <script src="js/jquery-3.2.1.min.js"></script> -->
-	<!-- <script src="js/bootstrap.min.js"></script>
-	<script src="js/mixitup.min.js"></script> -->
-	<!-- <script src="js/main.js"></script> -->
 
 </html>

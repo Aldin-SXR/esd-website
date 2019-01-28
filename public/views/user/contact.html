@@ -1,5 +1,5 @@
 <!-- Page info -->
-<div class="page-info-section set-bg" ng-style="{ 'background-image': 'url(img/page-bg/4.jpg)' }">
+<div class="page-info-section set-bg" ng-style="{ 'background-image': 'url(img/page-bg/about_page.jpg)' }">
     <div class="container">
         <div class="site-breadcrumb">
             <a href="#!/">Home</a>
@@ -9,30 +9,8 @@
 </div>
 <!-- Page info end -->
 
-<!-- search section -->
-<!-- <section class="search-section ss-other-page">
-    <div class="container">
-        <div class="search-warp">
-            <div class="section-title text-white">
-                <h2><span>Search your course</span></h2>
-            </div>
-            <div class="row">
-                <div class="col-lg-10 offset-lg-1"> -->
-                    <!-- search form -->
-                    <!-- <form class="course-search-form">
-                        <input type="text" placeholder="Course">
-                        <input type="text" class="last-m" placeholder="Category">
-                        <button class="site-btn btn-dark">Search Couse</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->
-<!-- search section end -->
-
 <!-- Page -->
-<section class="contact-page spad pb-0">
+<section class="contact-page spad pb-0" ng-controller="contactController">
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
@@ -43,12 +21,25 @@
                             <br> You can do so via this form.
                         </p>
                     </div>
-                    <form class="contact-form">
-                        <input type="text" placeholder="Your Name">
-                        <input type="text" placeholder="Your E-mail">
-                        <input type="text" placeholder="Subject">
-                        <textarea placeholder="Message"></textarea>
-                        <button class="site-btn">Send Message</button>
+                    <form name="contactForm" class="contact-form">
+                        <input ng-model="contactData.name" name="name" type="text" placeholder="Your name" required>
+                        <span style="color: red;" ng-show="contactForm.name.$dirty && contactForm.name.$invalid">
+                            <small class="form-text">Name is required.</small>
+                        </span>
+                        <input ng-model="contactData.email_address" name="email" type="email" placeholder="Your e-mail address"
+                            required>
+                        <span style="color:red" ng-show="contactForm.email.$dirty && contactForm.email.$invalid">
+                            <span ng-show="contactForm.email.$error.required"><small class="form-text">Email address is
+                                    required.</small></span>
+                            <span ng-show="contactForm.email.$error.email"><small class="form-text">Invalid email
+                                    address.</small></span>
+                        </span>
+                        <input ng-model="contactData.subject" type="text" placeholder="Subject">
+                        <textarea ng-model="contactData.message" name="message" placeholder="Message" required></textarea>
+                        <button class="site-btn" ng-click="sendMessage()" ng-disabled="loading">
+                            <span ng-show="loading"><i class="fa fa-spinner fa-spin"></i>&nbsp;Sending...</span>
+                            <span ng-show="!loading">Send Message</span>
+                        </button>
                     </form>
                 </div>
             </div>
