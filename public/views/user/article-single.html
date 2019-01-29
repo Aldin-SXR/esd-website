@@ -20,9 +20,8 @@
                     <h3>{{ article.title }}</h3>
                     <div class="course-metas">
                         <div class="course-meta">
-                            <!-- <div class="post-author" ng-style="{'background-image': 'url(' + article.author_picture + ')'}"></div> -->
                             <div class="course-author">
-                                <!-- <img class="post-author author-img" src="{{ article.author_picture }}"> -->
+                                <div class="ca-pic set-bg" ng-style="{ 'background-image': 'url({{ article.author_picture }})' }"></div>
                                 <h6>Author</h6>
                                 <p>{{ article.author_name }}, <span>{{ article.author_title }}</span></p>
                             </div>

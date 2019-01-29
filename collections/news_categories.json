@@ -1,0 +1,20 @@
+{ 
+    "_id" : ObjectId("5c4c715c744cf97ce022abb7"), 
+    "name" : "Annoucements"
+}
+{ 
+    "_id" : ObjectId("5c4c7166744cf97ce022abb8"), 
+    "name" : "Workshops"
+}
+{ 
+    "_id" : ObjectId("5c4c716f744cf97ce022abb9"), 
+    "name" : "Educational"
+}
+{ 
+    "_id" : ObjectId("5c4c717f744cf97ce022abba"), 
+    "name" : "Activities"
+}
+{ 
+    "_id" : ObjectId("5c4c718f744cf97ce022abbb"), 
+    "name" : "Other"
+}

@@ -1,0 +1,16 @@
+{ 
+    "_id" : ObjectId("5c4eb059744cf97ce022ad17"), 
+    "name" : "Workshop"
+}
+{ 
+    "_id" : ObjectId("5c4eb062744cf97ce022ad18"), 
+    "name" : "Competition"
+}
+{ 
+    "_id" : ObjectId("5c4eb072744cf97ce022ad19"), 
+    "name" : "Seminar"
+}
+{ 
+    "_id" : ObjectId("5c4eb07a744cf97ce022ad1a"), 
+    "name" : "Other"
+}

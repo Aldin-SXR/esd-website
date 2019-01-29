@@ -1,0 +1,98 @@
+{ 
+    "_id" : ObjectId("5c4593e2744cf944890bf9e8"), 
+    "name" : "Lejla Imširović", 
+    "title" : "President", 
+    "social_links" : {
+        "linkedin" : "https://www.linkedin.com/in/lejla-im%C5%A1irovi%C4%87/"
+    }, 
+    "short_bio" : "Lejla Imširović is currently an undergraduate student of Electrical and Electronics Engineering at the International Burch University. She graduated from the International High School of Tuzla and has always shown great ambition when it comes to her academic career. Ever since she enrolled in high school, Lejla has been working on research projects that involve renewable sources of energy. Doing so, she also participated in many science fairs, project olympiads and innovation festivals including the Regional Energetic Forum in Tuzla and the International Sustainable World (Energy-Engineering-Environment) Project Olympiad (I-SWEEEP) held in Houston, TX. Working on various research projects and participating in competitions helped her shape a clear vision of her future that she wants to devote to the development of new technologies in that field. She wishes to make a great impact on the energy sector of Bosnia and Herzegovina that, as she believes, has a great potential when it comes to renewable sources.", 
+    "picture" : "img/authors/1.jpg", 
+    "department" : "Electrical And Electronics Engineering", 
+    "year" : NumberInt(3), 
+    "approved_at" : ISODate("2016-11-28T19:20:20.874+0000"), 
+    "superuser" : true
+}
+{ 
+    "_id" : ObjectId("5c46e0ec744cf9695c06758b"), 
+    "name" : "Aldin Kovačević", 
+    "email_address" : "aldin@tribeos.io", 
+    "password" : "$2b$10$uZwzVI6h2ug3xhTCjmsZquINkGenPmgqwVhDSl4nrwAvcYMDBYfZq", 
+    "title" : "Vice President", 
+    "social_links" : {
+        "linkedin" : "https://www.linkedin.com/in/aldin-kovacevic/"
+    }, 
+    "short_bio" : "A student at International Burch University, Department of Information Technologies, hard-working, meticulous, highly motivated and willing to learn and adapt to new technologies. Primary areas of interest include embedded systems, machine learning and data science, PHP and Python programming. I am proficient in C and C++ programming and have experience with graphic design software (Adobe Photoshop and InDesign) - all self-taught.", 
+    "picture" : "img/authors/3.jpg", 
+    "department" : "Information Technologies", 
+    "year" : NumberInt(3), 
+    "superuser" : true, 
+    "approved_at" : "2016-11-28T19:20:20.874Z"
+}
+{ 
+    "_id" : ObjectId("5c46e150744cf9695c06758c"), 
+    "name" : "Džavid Isanović", 
+    "title" : "Advisor", 
+    "social_links" : {
+        "linkedin" : "https://www.linkedin.com/in/dzavidisanovic/"
+    }, 
+    "short_bio" : "I am an Electrical & Electronics Engineering student with 5 years of experience specializing in mixed signal embedded design. I am proficient with a wide variety of Atmel's and Microchip's microcontrollers. I also have experience in designing digital structures and PCB design and manufacturing. I can take your idea and transform it into a functioning circuit, delivering design files, code, simulation results, prototype PCBs, and a detailed BOM. I enjoy using my creative expertise and knowledge to provide my friends and clients with the best solutions. I like complicated and challenging requests, and my sense of tackling hard jobs makes me ready for almost any job in my areas of expertise, little or big.", 
+    "picture" : "img/authors/2.jpg", 
+    "department" : "Electrical And Electronics Engineering", 
+    "year" : NumberInt(3), 
+    "superuser" : true, 
+    "approved_at" : ISODate("2016-11-28T19:20:20.874+0000")
+}
+{ 
+    "_id" : ObjectId("5c4c34b1744cf97ce022ab98"), 
+    "name" : "Dino Mustafić", 
+    "department" : "Electrical And Electronics Engineering", 
+    "year" : NumberInt(3), 
+    "approved_at" : ISODate("2016-11-28T19:20:20.874+0000")
+}
+{ 
+    "_id" : ObjectId("5c4c4522744cf97ce022abaf"), 
+    "name" : "Emina Melić", 
+    "department" : "Electrical And Electronics Engineering", 
+    "year" : NumberInt(1), 
+    "approved_at" : ISODate("2018-11-26T19:20:20.874+0000")
+}
+{ 
+    "_id" : ObjectId("5c4c4534744cf97ce022abb0"), 
+    "name" : "Šejla Aganović", 
+    "department" : "Electrical And Electronics Engineering", 
+    "year" : NumberInt(1), 
+    "approved_at" : ISODate("2018-11-26T19:20:20.874+0000")
+}
+{ 
+    "_id" : ObjectId("5c4c453e744cf97ce022abb1"), 
+    "name" : "Lejla Cikotić", 
+    "department" : "Electrical And Electronics Engineering", 
+    "year" : NumberInt(1), 
+    "approved_at" : ISODate("2018-11-26T19:20:20.874+0000")
+}
+{ 
+    "_id" : ObjectId("5c4c455d744cf97ce022abb2"), 
+    "name" : "Belmin Karalija", 
+    "department" : "Information Technologies", 
+    "year" : NumberInt(1), 
+    "approved_at" : ISODate("2018-11-26T19:20:20.874+0000")
+}
+{ 
+    "_id" : ObjectId("5c4e14ec5329ae5111c251f0"), 
+    "name" : "Haris Muhibić", 
+    "email_address" : "haris@tribeos.io", 
+    "password" : "$2b$10$a1MjXCOMF5glSvajiQnZ1.wQqC1t4wGdwJPLUy/owSeln62pKPLwq", 
+    "department" : "Information Technologies", 
+    "year" : NumberInt(3), 
+    "registered_at" : ISODate("2019-01-27T20:30:36.224+0000")
+}
+{ 
+    "_id" : ObjectId("5c4f41838ff8213384a20892"), 
+    "name" : "Meris Lihić", 
+    "email_address" : "meris@gmail.com", 
+    "password" : "$2b$10$28eA90cKW9MWakU4poirb.yATTvEtMno4c1Zz.wKYdMwUVkT6R5Xe", 
+    "department" : "Electrical And Electronics Engineering", 
+    "year" : NumberInt(3), 
+    "registered_at" : "2019-01-28T17:53:07.257Z", 
+    "approved_at" : "2019-01-28T17:53:13.379Z"
+}

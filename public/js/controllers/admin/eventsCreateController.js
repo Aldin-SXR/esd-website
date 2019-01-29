@@ -36,6 +36,8 @@ const eventsCreateController = ($scope, $http, $location, $routeParams, toastr, 
     if ($routeParams.id) {
         $scope.event_id = $routeParams.id;
         $http.get("/events/" + $routeParams.id).then(response => {
+            response.data.start_date = new Date(response.data.start_date).toLocaleDateString();
+            response.data.end_date = new Date(response.data.end_date).toLocaleDateString();
             $scope.event = response.data;
             $scope.getEventCategories();
         }, error => {

@@ -1,0 +1,64 @@
+{ 
+    "_id" : ObjectId("5c4eafde744cf97ce022ad10"), 
+    "title" : "IBU ESD Kick-Off Workshop", 
+    "category_id" : "5c4eb059744cf97ce022ad17", 
+    "description" : "", 
+    "start_date" : ISODate("2018-10-23T00:00:00.000+0000"), 
+    "end_date" : ISODate("2018-10-25T00:00:00.000+0000"), 
+    "completed" : NumberInt(1), 
+    "enrolled_members" : [
+
+    ]
+}
+{ 
+    "_id" : ObjectId("5c4eb004744cf97ce022ad11"), 
+    "title" : "IBU ESD Kick-Off Competition", 
+    "category_id" : "5c4eb062744cf97ce022ad18", 
+    "start_date" : "2018-11-22T00:00:00.000Z", 
+    "end_date" : "2018-11-22T00:00:00.000Z", 
+    "completed" : NumberInt(1), 
+    "description" : "", 
+    "enrolled_members" : [
+
+    ]
+}
+{ 
+    "_id" : ObjectId("5c4eb046744cf97ce022ad12"), 
+    "title" : "PCB & Soldering Workshop", 
+    "category_id" : "5c4eb059744cf97ce022ad17", 
+    "start_date" : ISODate("2018-12-19T00:00:00.000+0000"), 
+    "end_date" : ISODate("2018-12-20T00:00:00.000+0000"), 
+    "description" : "", 
+    "completed" : NumberInt(1), 
+    "enrolled_members" : [
+
+    ]
+}
+{ 
+    "_id" : ObjectId("5c4ee29a701da856163eceee"), 
+    "title" : "Trip to Belgrade", 
+    "description" : "<p><span style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif;\">Joint field trip to Belgrade. The exact date of this field trip is 4 - 6 May.</span><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif;\" /><span style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif;\">The plan is to go for the first day (Friday) to Tuzla, where we will spend a night. The following day (Saturday) we will be going to Belgrade. The plan is to visit Thermal Power Plant in Tuzla and Technical Museum in Belgrade. On the return from Belgrade, we will spend another night in Tuzla and the next morning (Sunday) we will be returning back to Sarajevo.</span><br style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif;\" /><span style=\"color: #1d2129; font-family: Helvetica, Arial, sans-serif;\">The price for the trip will be 70 KM.</span></p>", 
+    "start_date" : ISODate("2019-05-04T23:00:00.000+0000"), 
+    "end_date" : ISODate("2019-05-06T23:00:00.000+0000"), 
+    "category_id" : "5c4eb07a744cf97ce022ad1a", 
+    "completed" : NumberInt(0), 
+    "enrolled_members" : [
+        "Lejla Imširović", 
+        "Aldin Kovačević", 
+        "Džavid Isanović", 
+        "Dino Mustafić", 
+        "Meris Lihić"
+    ]
+}
+{ 
+    "_id" : ObjectId("5c4f1f52df577915e3c14734"), 
+    "title" : "NodeMCU workshop", 
+    "description" : "<p><span style=\"color: #1c1e21; font-family: Helvetica, Arial, sans-serif;\">We are proud to announce that&nbsp;</span><a style=\"color: #365899; cursor: pointer; text-decoration-line: none; font-family: Helvetica, Arial, sans-serif;\" href=\"https://www.facebook.com/IBUesd/?__tn__=%2CdK%2AF-R&amp;eid=ARCARrKfrWqO5M90AA22y3bZx_IQ4egOi5zjWKfGdfCA3i25wqlXPMTEIH6-3GHvQdItjxvkIkcc7xsD&amp;hc_location=group_dialog\" data-hovercard=\"/ajax/hovercard/page.php?id=814894065235213&amp;extragetparams=%7B%22__tn__%22%3A%22%2CdK%2AF-R%22%2C%22eid%22%3A%22ARCARrKfrWqO5M90AA22y3bZx_IQ4egOi5zjWKfGdfCA3i25wqlXPMTEIH6-3GHvQdItjxvkIkcc7xsD%22%2C%22directed_target_id%22%3Anull%2C%22groups_location%22%3Anull%2C%22hc_location%22%3A%22group_dialog%22%7D\" data-hovercard-prefer-more-content-show=\"1\">IBU Embedded System Design</a><span style=\"color: #1c1e21; font-family: Helvetica, Arial, sans-serif;\">&nbsp;is organizing NodeMCU Workshop.</span><br style=\"color: #1c1e21; font-family: Helvetica, Arial, sans-serif;\" /><span style=\"color: #1c1e21; font-family: Helvetica, Arial, sans-serif;\">The workshop will be held next week, 27 - 29 March, starting at 17:00 in Innovation Centre (classroom 215).</span><br style=\"color: #1c1e21; font-family: Helvetica, Arial, sans-serif;\" /><a class=\"_58cn\" style=\"color: #365899; cursor: pointer; text-decoration-line: none; font-family: Helvetica, Arial, sans-serif;\" href=\"https://www.facebook.com/hashtag/nodemcu?epa=HASHTAG\" data-ft=\"{&quot;type&quot;:104,&quot;tn&quot;:&quot;*N&quot;}\">#NodeMCU</a><span style=\"color: #1c1e21; font-family: Helvetica, Arial, sans-serif;\">&nbsp;</span><a class=\"_58cn\" style=\"color: #365899; cursor: pointer; text-decoration-line: none; font-family: Helvetica, Arial, sans-serif;\" href=\"https://www.facebook.com/hashtag/iot?epa=HASHTAG\" data-ft=\"{&quot;type&quot;:104,&quot;tn&quot;:&quot;*N&quot;}\">#IoT</a><span style=\"color: #1c1e21; font-family: Helvetica, Arial, sans-serif;\">&nbsp;</span><a class=\"_58cn\" style=\"color: #365899; cursor: pointer; text-decoration-line: none; font-family: Helvetica, Arial, sans-serif;\" href=\"https://www.facebook.com/hashtag/ibuesd?epa=HASHTAG\" data-ft=\"{&quot;type&quot;:104,&quot;tn&quot;:&quot;*N&quot;}\">#IBUesd</a></p>", 
+    "start_date" : ISODate("2019-03-26T23:00:00.000+0000"), 
+    "end_date" : ISODate("2019-03-28T23:00:00.000+0000"), 
+    "category_id" : "5c4eb059744cf97ce022ad17", 
+    "enrolled_members" : [
+        "Meris Lihić"
+    ], 
+    "completed" : NumberInt(0)
+}

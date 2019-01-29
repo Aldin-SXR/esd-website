@@ -1,0 +1,18 @@
+{ 
+    "_id" : ObjectId("5c4ad945744cf92ee31fefb0"), 
+    "type" : "award", 
+    "description" : "Hosts of EMECS-thon BiH", 
+    "year" : 2015.0
+}
+{ 
+    "_id" : ObjectId("5c4ad95f744cf92ee31fefb1"), 
+    "type" : "award", 
+    "description" : "Hosts of EMECS-thon BiH", 
+    "year" : 2016.0
+}
+{ 
+    "_id" : ObjectId("5c4ad972744cf92ee31fefb2"), 
+    "type" : "honor", 
+    "description" : "Microsoft IoT Hackathon", 
+    "year" : 2016.0
+}
