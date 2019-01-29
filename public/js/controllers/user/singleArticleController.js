@@ -1,6 +1,7 @@
 const singleArticleController = ($scope, $http, $routeParams, $sce) => {
     /* Load a single article */
     $http.get("/news/" + $routeParams.id).then(response => {
+        response.data.published_at = new Date(response.data.published_at).toLocaleDateString();
         $scope.article = response.data;
         $scope.article.content = $sce.trustAsHtml($scope.article.content);
         /* Load author data */

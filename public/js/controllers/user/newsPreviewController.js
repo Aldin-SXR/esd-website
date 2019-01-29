@@ -15,6 +15,12 @@ const newsPreviewController = ($scope, $http, $location, $window) => {
     /* */
     $scope.getNewsPreviews = (start, limit, category) => {
         $http.get("/news/preview?start=" + start + "&limit=" + limit + "&category_id=" + category).then((response) => {
+            if (response.data.news && response.data.news.length) {
+                for (let i = 0; i < response.data.news.length; i++) {
+                    /* Convert to human-friendly dates */
+                    response.data.news[i].published_at = new Date(response.data.news[i].published_at).toLocaleDateString();
+                }
+            }
             $scope.news = response.data.news;
             $scope.totalItems = response.data.numOfNews;
         }, (error) => {

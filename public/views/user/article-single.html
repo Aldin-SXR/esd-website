@@ -33,32 +33,14 @@
                                 <p>{{ article.category_name }}</p>
                             </div>
                         </div>
-                        <!-- <div class="course-meta">
-                            <div class="cm-info">
-                                <h6>Students</h6>
-                                <p>120 Registered Students</p>
-                            </div>
-                        </div>
-                        <div class="course-meta">
-                            <div class="cm-info">
-                                <h6>Reviews</h6>
-                                <p>2 Reviews <span class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star is-fade"></i>
-                                    </span></p>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <img ng-hide="article.image == 'img/no_image_available.png'" src="{{ article.image }}"
-                alt="{{ article.description }}" class="course-preview">
-        </div>
+        <!-- <div class="row justify-content-center">
+            <img ng-hide="article.image == 'img/no_image_available.png'" src="{{ article.image }}" alt="{{ article.description }}"
+                class="course-preview">
+        </div> -->
         <div style="margin-top: 2%;" class="row">
             <div class="col-lg-10 offset-lg-1 course-list">
                 <div ng-bind-html="article.content">

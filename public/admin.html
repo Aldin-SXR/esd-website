@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html >
+<html lang="en" ng-app="esd-admin-app" ng-class="{'nav-open': openDrawer}">
 
 <head>
 	<meta charset="utf-8" />
@@ -34,7 +34,7 @@
 	<script src="js/angular-datepicker.min.js"></script>
 </head>
 
-<body ng-app="esd-admin-app">
+<body>
 	<!-- Page Preloder -->
 	<div ng-hide="pageLoaded" id="preloader">
 		<div class="loader"></div>
@@ -50,7 +50,7 @@
 		});
 	</script>
 	<div class="wrapper ">
-		<div class="sidebar" data-color="azure" data-background-color="white" data-image="admin-assets/assets/img/sidebar-1.jpg">
+		<div class="sidebar" data-color="azure" data-background-color="white" data-image="./admin-assets/assets/img/sidebar-1.jpg">
 			<!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -87,12 +87,18 @@
 							<p>Events</p>
 						</a>
 					</li>
-					<li class="nav-item ">
-						<a class="nav-link" href="./user.html">
+					<li class="nav-item " ng-class="{'active': activeTab == 'profile'}">
+						<a class="nav-link" href="#!profile">
 							<i class="material-icons">person</i>
 							<p>Profile</p>
 						</a>
 					</li>
+					<li class="nav-item">
+							<a class="nav-link" href ng-click="logOut()">
+								<i class="material-icons">power_settings_new</i>
+								<p>Log out</p>
+							</a>
+						</li>
 				</ul>
 			</div>
 		</div>
@@ -104,7 +110,7 @@
 						<a class="navbar-brand" ng-bind="viewTitle"></a>
 					</div>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false"
-					 aria-label="Toggle navigation">
+					 aria-label="Toggle navigation" ng-click="toggleNavigation()">
 						<span class="sr-only">Toggle navigation</span>
 						<span class="navbar-toggler-icon icon-bar"></span>
 						<span class="navbar-toggler-icon icon-bar"></span>
@@ -124,7 +130,7 @@
 									</p>
 								</a>
 								<div uib-dropdown-menu class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-									<span class="dropdown-item">Profile</span>
+									<span class="dropdown-item" ng-click="goToProfile()">Profile</span>
 									<span class="dropdown-item" ng-click="logOut()">Log out</span>
 								</div>
 							</li>
@@ -164,10 +170,11 @@
 						<script>
 							document.write(new Date().getFullYear())
 						</script>, made with <i class="material-icons">favorite</i> by
-						<a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+						<a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>, and modified by Aldin Kovačević, for a better web.
 					</div>
 				</div>
 			</footer>
+			<div ng-controller="adminLinksController" ng-show="openDrawer" ng-click="closeNavigation()" class="close-layer" ng-class="{'visible': openDrawer}"></div>
 		</div>
 	</div>
 	<script src="js/controllers/admin/dropdownController.js"></script>
@@ -178,6 +185,7 @@
 	<script src="js/controllers/admin/dashboardController.js"></script>
 	<script src="js/controllers/admin/eventsListController.js"></script>
 	<script src="js/controllers/admin/eventsCreateController.js"></script>
+	<script src="js/controllers/admin/profileController.js"></script>
 	<script src="js/admin-app.js"></script>
 	<script src="js/Config.js"></script>
 

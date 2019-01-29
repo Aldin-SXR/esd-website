@@ -35,7 +35,7 @@
                 <div class="section-title mb-0">
                     <h2>Honors & Awards</h2>
                     <div class="row justify-content-center" ng-controller="awardsController">
-                        <div class="col-md-4" ng-repeat="award in awards">
+                        <div style="margin-bottom: 10px;" class="col-md-4" ng-repeat="award in awards">
                             <div ng-switch on="award.type">
                                 <img ng-switch-when="award" src="img/awards.png" style="width: auto; height: 100px; margin-bottom: 5%">
                                 <img ng-switch-when="honor" src="img/honors.png" style="width: auto; height: 100px; margin-bottom: 5%">

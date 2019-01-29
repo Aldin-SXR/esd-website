@@ -67,6 +67,11 @@ img {
 	color: #4169e1 !important;
 }
 
+.active-mob {
+	background-color: #4169e1 !important;
+	color: #ffffff !important;
+}
+
 input:focus,
 select:focus,
 button:focus,

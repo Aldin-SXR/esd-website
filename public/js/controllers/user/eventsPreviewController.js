@@ -5,7 +5,7 @@ const eventsPreviewController = ($scope, $http, $location, $window, toastr) => {
 
     $scope.getEnrolledEvents = () => {
         let name = jwt_decode(localStorage.getItem("user_token")).name;
-        $http.post("/private/events/applications", { member_name: name }, HTTP_CONFIG).then(response => {
+        $http.post("/private/events/applications", { member_name: name }, HTTP_CONFIG_USER).then(response => {
             $scope.enrolledEvents = response.data;
         }, error => {
             console.log(error);
@@ -79,7 +79,7 @@ const eventsPreviewController = ($scope, $http, $location, $window, toastr) => {
     $scope.cancelApplication = (event_id) => {
         $scope.loading = true;
         let name = jwt_decode(localStorage.getItem("user_token")).name;
-        $http.put("/private/events/" + event_id +"/cancel", { member_name: name }, HTTP_CONFIG).then(response => {
+        $http.put("/private/events/" + event_id +"/cancel", { member_name: name }, HTTP_CONFIG_USER).then(response => {
             $scope.loading = false;
             $scope.enrolled = false;
             toastr.success(response.data.message, "Success");

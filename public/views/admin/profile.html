@@ -1,0 +1,109 @@
+<div class="content" ng-controller="profileController">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Edit Profile</h4>
+                        <p class="card-category">Update your profile information.</p>
+                    </div>
+                    <div class="card-body">
+                        <form name="profileForm" ng-submit="updateProfile()">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Name and surname</label>
+                                        <input ng-model="editableProfile.name" type="text" class="form-control" required name="name">
+                                        <span style="color: red;" ng-show="profileForm.name.$dirty && profileForm.name.$invalid">
+                                                <small class="form-text">Name is required.</small>
+                                            </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Email address</label>
+                                        <input ng-model="editableProfile.email_address" type="email" class="form-control"
+                                            disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="bmd-label-floating">Department:</label>
+                                    <ui-select ng-model="selectedDepartment.value" theme="selectize">
+                                        <ui-select-match>
+                                            <span ng-bind="$select.selected.name"></span>
+                                        </ui-select-match>
+                                        <ui-select-choices repeat="item in (departments | filter: $select.search) track by item.id">
+                                            <span ng-bind="item.name"></span>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="bmd-label-floating">Year:</label>
+                                    <ui-select ng-model="selectedYear.value" theme="selectize">
+                                        <ui-select-match>
+                                            <span ng-bind="$select.selected.year"></span>
+                                        </ui-select-match>
+                                        <ui-select-choices repeat="item in (years | filter: $select.search) track by item.id">
+                                            <span ng-bind="item.year"></span>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Title</label>
+                                        <input ng-model="editableProfile.title" type="text" class="form-control" required name="title">
+                                        <span style="color: red;" ng-show="profileForm.title.$dirty && profileForm.title.$invalid">
+                                                <small class="form-text">Title is required.</small>
+                                            </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">LinkedIn profile</label>
+                                            <input ng-model="editableProfile.social_links.linkedin" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Short biography</label>
+                                        <div class="form-group">
+                                            <textarea ng-model="editableProfile.short_bio" class="form-control" rows="5"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary pull-right" ng-click="updateProfile()" ng-disabled="loading">
+                                <span ng-show="!loading">Update Profile</span>
+                                <span ng-show="loading"><i class="fa fa-spinner fa-spin"></i>&nbsp;Updating...</span>
+                            </button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <a href="#pablo">
+                            <img class="img" src="{{ profile.picture }}" />
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-category text-gray">{{ profile.title }}</h6>
+                        <h4 class="card-title">{{ profile.name }}</h4>
+                        <p class="card-description">
+                            {{ profile.short_bio }}
+                        </p>
+                        <a target="_blank" href="{{ profile.social_links.linkedin }}" class="btn btn-primary btn-round">Follow</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

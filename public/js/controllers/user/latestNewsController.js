@@ -13,6 +13,7 @@ const latestNewsController = ($scope, $http, $location, $window) => {
         $http.get("/news/preview?start=0&limit=5&category_id=" + category).then((response) => {
             if (response.data.news && response.data.news.length) {
                 for (let i = 0; i < response.data.news.length; i++) {
+                    response.data.news[i].published_at = new Date(response.data.news[i].published_at).toLocaleDateString();
                     if (!response.data.news[i].image || response.data.news[i].image === "" || response.data.news[i].image === null) {
                         response.data.news[i].image = "img/no_image_available.png";
                     }

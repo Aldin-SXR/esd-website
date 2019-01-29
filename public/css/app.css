@@ -25,6 +25,9 @@
   cursor: pointer;
 }
 
+.dropdown-toggle::after {
+  display:none;
+}
 /* .ui-select-container.open>.ui-select-choices{
   opacity: 1 !important;
 } */

@@ -5,11 +5,13 @@ const bodyParser = require("body-parser");
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const nodeMailer = require("nodemailer");
+const cors = require("cors");
 const Config = require("./Config");
 
 let db;
 let app = express();
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/", (req, res, next) => {
@@ -77,7 +79,7 @@ app.post("/login", (req, res) => {
                     superuser: user.superuser,
                     token: jwt.sign({
                         _id: user._id, email_address: user.email_address, name: user.name, superuser: user.superuser
-                    }, Config.JWT_SECRET)
+                    }, Config.JWT_SECRET, { expiresIn: "1d" })
                 });
             } else {
                 res.status(401).send({ message: "You have entered an invalid password." })
@@ -122,6 +124,20 @@ app.post("/register", (req, res) => {
     });
 });
 
+app.put("/private/profile/:id", (req, res) => {
+    delete req.body._id;
+    db.collection("members").findOneAndUpdate({ _id: ObjectID(req.params.id) }, { $set: req.body }, (error, result) => {
+        if (error) {
+            throw error;
+        }
+        if (result.value) {
+            res.json({ success: true, message: "Successfully updated your profile." });
+        } else {
+            res.status(404).send({ status: "The member by the given ID was not found." });
+        }
+    });
+});
+
 app.post("/contact", (req, res) => {
     /* Check for empty data */
     if (!req.body.email_address || !req.body.message || !req.body.name) {
@@ -153,17 +169,32 @@ app.post("/contact", (req, res) => {
             res.status(400).send({ message: "Unkown mailing error." });
             throw error;
         }
-        res.json({ success: true, message: "Message successfully sent." });
+        /* Save message for future use */
+        db.collection("contact_messages").insertOne(req.body, (error, result) => {
+            if (error) {
+                throw error;
+            }
+            res.json({ success: true, message: "Message successfully sent." });
+        });
         // console.log("Email sent: " + info.response);
     });
 });
 
 app.get("/leaders/short", (req, res) => {
-    db.collection("members").find({ superuser: true }).toArray((error, members) => {
+    db.collection("members").find({ superuser: true }, { email_address: 0, password: 0 }).toArray((error, members) => {
         if (error) {
             throw error;
         }
         res.json(members);
+    });
+});
+
+app.get("/private/profile/:id", (req, res) => {
+    db.collection("members").findOne({ _id: ObjectID(req.params.id)},  { password: 0 }, (error, member) => {
+        if (error) {
+            throw error;
+        }
+        res.json(member);
     });
 });
 
@@ -185,12 +216,13 @@ app.get("/news/preview", (req, res) => {
     if (category_id) {
         query = { category_id: category_id };
     }
-    db.collection("news").find(query, { content: 0 }).skip(start).limit(limit).sort({ published_at: -1 }).toArray((error, news) => {
+    db.collection("news").find(query, { content: 0 }).sort({ published_at: -1 }).skip(start).limit(limit).toArray((error, news) => {
         if (error) {
             throw error;
         }
         if (!news.length) {
             res.json([]);
+            return;
         }
         /* Match with authors */
         let categoryCounter = 0;
@@ -227,6 +259,7 @@ app.get("/news/preview", (req, res) => {
                             numOfNews: numOfNews,
                             news: news
                         });
+                        return;
                     })
                 }
             });

@@ -23,6 +23,12 @@ const dashboardController = ($scope, $http, $location, $window) => {
         console.log(error);
     });
 
+    $http.get("/leaders/short").then(response => {
+        $scope.adminList = response.data;
+    }, error => {
+        console.log(error);
+    });
+
     $scope.goToNews = () => {
         $location.path("/news");
         $window.scrollTo(0, 0);

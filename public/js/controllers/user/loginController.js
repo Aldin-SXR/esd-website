@@ -33,11 +33,12 @@ const loginController = ($scope, $uibModal, toastr, $location, $route) => {
                     $http.post("/login", $scope.loginData).then(response => {
                         toastr.success(response.data.message, "Successful log in");
                         $scope.loading = false;
-                        localStorage.setItem("user_token", response.data.token);
                         /* Appropriate redirect based on user type */
                         if (response.data.superuser) {
+                            localStorage.setItem("admin_token", response.data.token);
                             window.location.href = "admin.html";
                         } else {
+                            localStorage.setItem("user_token", response.data.token);
                             window.location.href = ".";
                         }
                     }, error => {

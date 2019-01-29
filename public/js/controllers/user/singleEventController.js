@@ -25,7 +25,7 @@ const singleEventController = ($scope, $http, $routeParams, $sce, toastr) => {
         });
         /* Check enrollment status */
         let name = jwt_decode(localStorage.getItem("user_token")).name;
-        $http.post("/private/events/" + $routeParams.id + "/check_application", { member_name: name }, HTTP_CONFIG).then(response => {
+        $http.post("/private/events/" + $routeParams.id + "/check_application", { member_name: name }, HTTP_CONFIG_USER).then(response => {
             $scope.enrolled = response.data.enrolled;
         }, error => {
             console.log(error);
@@ -37,7 +37,7 @@ const singleEventController = ($scope, $http, $routeParams, $sce, toastr) => {
     $scope.applyForEvent = (event_id) => {
         $scope.loading = true;
         let name = jwt_decode(localStorage.getItem("user_token")).name;
-        $http.put("/private/events/" + event_id +"/apply", { member_name: name }, HTTP_CONFIG).then(response => {
+        $http.put("/private/events/" + event_id +"/apply", { member_name: name }, HTTP_CONFIG_USER).then(response => {
             $scope.loading = false;
             $scope.enrolled = true;
             toastr.success(response.data.message, "Success");
@@ -50,7 +50,7 @@ const singleEventController = ($scope, $http, $routeParams, $sce, toastr) => {
     $scope.cancelApplication = (event_id) => {
         $scope.loading = true;
         let name = jwt_decode(localStorage.getItem("user_token")).name;
-        $http.put("/private/events/" + event_id +"/cancel", { member_name: name }, HTTP_CONFIG).then(response => {
+        $http.put("/private/events/" + event_id +"/cancel", { member_name: name }, HTTP_CONFIG_USER).then(response => {
             $scope.loading = false;
             $scope.enrolled = false;
             toastr.success(response.data.message, "Success");

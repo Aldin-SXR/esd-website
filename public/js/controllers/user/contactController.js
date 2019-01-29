@@ -13,7 +13,7 @@ const contactController = ($scope, $http, toastr) => {
 
     $scope.sendMessage = () => {
         $scope.loading = true;
-        $http.post("/contact", $scope.contactData, HTTP_CONFIG).then(response => {
+        $http.post("/contact", $scope.contactData).then(response => {
             $scope.loading = false;
             toastr.success(response.data.message, "Success");
             $scope.contactData.subject = "";

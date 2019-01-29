@@ -22,6 +22,9 @@ app.config(($routeProvider) => {
     }).when("/events/:id", {
         templateUrl: "views/user/event-single.html",
         activeTab: "events"
+    }).when("/profile", {
+        templateUrl: "views/user/profile.html",
+        activeTab: "profile"
     });
 })
 
@@ -40,6 +43,7 @@ app.controller("latestEventsController", latestEventsController);
 app.controller("eventsPreviewController", eventsPreviewController);
 app.controller("singleEventController", singleEventController);
 app.controller("contactController", contactController);
+app.controller("userProfileController", userProfileController);
 
 /* Filters */
 app.filter('trustAsHtml', ['$sce', function($sce) {

@@ -33,12 +33,16 @@ adminApp.config(($routeProvider) => {
         templateUrl: "views/admin/event-create.html",
         activeTab: "news",
         viewTitle: "Edit an Event"
-    })
+    }).when("/profile", {
+        templateUrl: "views/admin/profile.html",
+        activeTab: "profile",
+        viewTitle: "My Profile"
+    });
 })
 
 adminApp.run(['$rootScope', 'toastr', ($rootScope, toastr) => {
     try {
-        let token = jwt_decode(localStorage.getItem("user_token"));
+        let token = jwt_decode(localStorage.getItem("admin_token"));
         if (!token || (token && !token.superuser)) {
             window.location.href = "index.html";
             toastr.error("You are not authorized to access this page.", "Authorization error.");
@@ -50,6 +54,10 @@ adminApp.run(['$rootScope', 'toastr', ($rootScope, toastr) => {
 
     $rootScope.$on('$routeChangeSuccess', (event, current, previous) => {
         $rootScope.viewTitle = current.$$route.viewTitle;
+    });
+
+    $rootScope.$on("openDrawer", (event, data) => {
+        $rootScope.openDrawer = data;
     });
 }]);
 
@@ -63,3 +71,4 @@ adminApp.controller("newsWriteController", newsWriteController);
 adminApp.controller("dashboardController", dashboardController);
 adminApp.controller("eventsListController", eventsListController);
 adminApp.controller("eventsCreateController", eventsCreateController);
+adminApp.controller("profileController", profileController);

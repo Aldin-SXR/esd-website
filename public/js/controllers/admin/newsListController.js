@@ -15,6 +15,10 @@ const newsListController = ($scope, $http, $location, $uibModal, toastr, $rootSc
 
     $scope.getNews = (start, limit) => {
         $http.get("/news/preview?start=" + start + "&limit=" + limit).then((response) => {
+            for (let i = 0; i < response.data.news.length; i++) {
+                response.data.news[i].published_at = new Date(response.data.news[i].published_at).toLocaleDateString();
+                response.data.news[i].last_edited_at = response.data.news[i].last_edited_at ? new Date(response.data.news[i].last_edited_at).toLocaleDateString() : null;
+            }
             $scope.newsPreview = response.data.news;
             $scope.totalItems = response.data.numOfNews;
         }, (error) => {

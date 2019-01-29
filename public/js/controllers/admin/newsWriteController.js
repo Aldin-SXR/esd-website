@@ -30,7 +30,7 @@ const newsWriteController = ($scope, $http, $location, $routeParams, toastr, $wi
     } else {
         /* Default article */
         $scope.article = { 
-            author_id: jwt_decode(localStorage.getItem("user_token"))._id,
+            author_id: jwt_decode(localStorage.getItem("admin_token"))._id,
             disable_comments: false
         };
         $scope.getNewsCategories();
