@@ -30,15 +30,17 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-user"></i></div>
                         </div>
-                        <input ng-model="registerData.email_address" type="email" name="email" class="form-control" id="email"
-                            placeholder="Enter your email" required>
+                        <input ng-model="registerData.email_address" type="email" name="email" class="form-control"
+                            id="email" placeholder="Enter your email" required>
                     </div>
                     <span style="color:red" ng-show="signupForm.email.$dirty && signupForm.email.$invalid">
                         <span ng-show="signupForm.email.$error.required"><small class="form-text">Email address is
                                 required.</small></span>
-                        <span ng-show="signupForm.email.$error.email"><small class="form-text">Invalid email address.</small></span>
+                        <span ng-show="signupForm.email.$error.email"><small class="form-text">Invalid email
+                                address.</small></span>
                     </span>
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                        else.</small>
                 </div>
             </div>
             <div class="col-md-6">
@@ -48,8 +50,8 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-lock"></i></div>
                         </div>
-                        <input ng-model="registerData.password" type="password" name="password" class="form-control" id="password"
-                            placeholder="Enter your password" required minlength="8" maxlength="24">
+                        <input ng-model="registerData.password" type="password" name="password" class="form-control"
+                            id="password" placeholder="Enter your password" required minlength="8" maxlength="24">
                     </div>
                     <span style="color: red;" ng-show="signupForm.password.$dirty && signupForm.password.$invalid">
                         <span ng-show="signupForm.password.$error.required"><small class="form-text">Password is
@@ -76,7 +78,7 @@
             </div>
             <div class="col-md-6">
                 <label class="bmd-label-floating">Year:</label>
-                <ui-select ng-model="selectedYear.value" theme="selectize">
+                <ui-select ng-model="selectedYear.value" theme="selectize" on-select="checkForInstitution($item)">
                     <ui-select-match>
                         <span ng-bind="$select.selected.year"></span>
                     </ui-select-match>
@@ -84,6 +86,31 @@
                         <span ng-bind="item.year"></span>
                     </ui-select-choices>
                 </ui-select>
+            </div>
+        </div>
+        <div style="margin-top: 10px;" class="row align-items-center" ng-show="askForInstitution">
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label for="email">Currently at:</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fa fa-building"></i></div>
+                        </div>
+                        <input ng-model="registerData.currently_at" type="text" name="currently_at" class="form-control"
+                            id="currently_at" placeholder="Enter your current institution or workplace">
+                    </div>
+                    <small id="emailHelp" class="form-text text-muted">This field is optional.</small>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input ng-model="registerData.display_alumni" class="form-check-input" type="checkbox" id="shareAlumni">
+                        <label class="form-check-label" for="defaultCheck1">
+                            Share on Alumni page
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
         <button style="float: right; margin-top: 5%;" type="submit" ng-click="signUp()" class="btn btn-success"
