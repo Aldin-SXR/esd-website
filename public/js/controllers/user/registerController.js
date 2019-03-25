@@ -19,11 +19,20 @@ const registerController = ($scope, $uibModal, toastr) => {
                 $scope.years = [
                     { id: 1, year: 1 },
                     { id: 2, year: 2 },
-                    { id: 3, year: 3 }
+                    { id: 3, year: 3 },
+                    { id: 4, year: 'Alumni' }
                 ];
             
                 $scope.selectedDepartment = { value: $scope.departments[0] };
                 $scope.selectedYear = { value: $scope.years[0] };
+
+                $scope.checkForInstitution = (item) => {
+                    if (item.year === 'Alumni') {
+                        $scope.askForInstitution = true;
+                    } else {
+                        $scope.askForInstitution = false;
+                    }
+                }
                 
                 $scope.loading = false;
                 $scope.cancel = () => {
