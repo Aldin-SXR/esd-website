@@ -10,7 +10,7 @@ const latestEventsController = ($scope, $http, $location, $window) => {
     }
     /* */
     $scope.getLatestEvents = (category) => {
-        $http.get("/events/preview?start=0&limit=5&completed=0&category_id=" + category).then((response) => {
+        $http.get("/events/preview?start=0&limit=4&completed=0&category_id=" + category).then((response) => {
             if (response.data.events && response.data.events.length) {
                 for (let i = 0; i < response.data.events.length; i++) {
                     /* Convert to human-friendly dates */
