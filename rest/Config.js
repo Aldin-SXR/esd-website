@@ -5,5 +5,8 @@ module.exports = {
     MAIL_AUTH: {
         user: "ibuesd@gmail.com",
         pass: "sifrusmodalipr"
-    }
+    },
+    MAILING_LIST: [
+        'aldin.kovacevic.97@gmail.com'
+    ]
 }

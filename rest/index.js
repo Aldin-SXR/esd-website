@@ -101,14 +101,22 @@ app.post("/register", (req, res) => {
         res.status(400).send({ message: "Invalid registration data." });
         return;
     }
-    /* creating a new movie object in order to avoid adding uncessary fields later on */
+    /* creating a new member object in order to avoid adding uncessary fields later on */
     let member = {
         name: req.body.name,
         email_address: req.body.email_address,
         password: bcrypt.hashSync(req.body.password, 10),
         department: req.body.department,
         year: req.body.year,
-        registered_at: new Date()
+        registered_at: new Date(),
+        currently_at: req.body.currently_at,
+        display_alumni: req.body.display_alumni
+    }
+    if (req.body.currently_at) {
+        member.currently_at = req.body.currently_at;
+    }
+    if (req.body.display_alumni) {
+        member.display_alumni = req.body.display_alumni;
     }
     /* Check for duplicates */
     db.collection("members").findOne({ email_address: req.body.email_address }, { email_address: 1 }, (error, user) => {
@@ -161,7 +169,7 @@ app.post("/contact", (req, res) => {
     /* Set up mail */
     let mailOptions = {
         from: "no-reply@esdclub.com",
-        to: Config.MAIL_AUTH.user,
+        to: Config.MAILING_LIST.concat(Config.MAIL_AUTH.user),
         subject: "IBU ESD | New message from contact form",
         html:  "<b>Name: </b>" + req.body.name + "<br><b>Email address: </b>" + req.body.email_address + "<br><b>Subject: </b>" + 
         req.body.subject + "<br><hr><em>Message: </em><br>" + req.body.message
