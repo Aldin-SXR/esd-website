@@ -7,6 +7,7 @@ module.exports = {
         pass: "sifrusmodalipr"
     },
     MAILING_LIST: [
-        'aldin.kovacevic.97@gmail.com'
+        'aldin.kovacevic.97@gmail.com',
+        'lejlaimsirovic3@gmail.com'
     ]
 }
