@@ -23,9 +23,10 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Event title:</label>
-                                    <input name="title" ng-model="event.title" type="text" placeholder="Enter a suitable name"
-                                        class="form-control" required>
-                                    <span style="color: red;" ng-show="eventForm.title.$dirty && eventForm.title.$invalid">
+                                    <input name="title" ng-model="event.title" type="text"
+                                        placeholder="Enter a suitable name" class="form-control" required>
+                                    <span style="color: red;"
+                                        ng-show="eventForm.title.$dirty && eventForm.title.$invalid">
                                         <small class="form-text">Event title is required.</small>
                                     </span>
                                 </div>
@@ -37,7 +38,8 @@
                                         <ui-select-match>
                                             <span ng-bind="$select.selected.name"></span>
                                         </ui-select-match>
-                                        <ui-select-choices repeat="item in (event_categories | filter: $select.search) track by item._id">
+                                        <ui-select-choices
+                                            repeat="item in (event_categories | filter: $select.search) track by item._id">
                                             <span ng-bind="item.name"></span>
                                         </ui-select-choices>
                                     </ui-select>
@@ -49,34 +51,49 @@
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Start date:</label>
                                     <datepicker date-format="yyyy/MM/dd">
-                                        <input ng-model="event.start_date" type="text" placeholder="Enter the starting date"
-                                            class="form-control">
+                                        <input ng-model="event.start_date" type="text"
+                                            placeholder="Enter the starting date" class="form-control">
                                     </datepicker>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="bmd-label-floating">End date:</label>
-                                        <datepicker date-min-limit="event.start_date" date-format="yyyy/MM/dd">
-                                            <input ng-disabled="!event.start_date" ng-model="event.end_date" type="text" placeholder="Enter the ending date"
-                                                class="form-control">
-                                        </datepicker>
-                                    </div>
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">End date:</label>
+                                    <datepicker date-min-limit="event.start_date" date-format="yyyy/MM/dd">
+                                        <input ng-disabled="!event.start_date" ng-model="event.end_date" type="text"
+                                            placeholder="Enter the ending date" class="form-control">
+                                    </datepicker>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Event banner:</label>
+                                    <input name="title" ng-model="event.banner" type="text"
+                                        placeholder="Enter a suitable event banner link" class="form-control" required>
+                                    <span style="color: red;"
+                                        ng-show="eventForm.banner.$dirty && eventForm.banner.$invalid">
+                                        <small class="form-text">Event banner is required.</small>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Event description:</label>
-                                    <textarea name="content" ui-tinymce="tinymceOptions" ng-model="event.description"></textarea>
-                                    <span style="color: red;" ng-show="eventForm.description.$dirty && eventForm.description.$invalid">
+                                    <textarea name="content" ui-tinymce="tinymceOptions"
+                                        ng-model="event.description"></textarea>
+                                    <span style="color: red;"
+                                        ng-show="eventForm.description.$dirty && eventForm.description.$invalid">
                                         <small class="form-text">Event description is required.</small>
                                     </span>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" ng-click="event_id ? editEvent() : submitEvent()" class="btn btn-primary pull-right"
-                            ng-disabled="loading">
+                        <button type="submit" ng-click="event_id ? editEvent() : submitEvent()"
+                            class="btn btn-primary pull-right" ng-disabled="loading">
                             <span ng-show="!loading">
                                 <span ng-show="!event_id">Create event</span>
                                 <span ng-show="event_id">Update event</span>
