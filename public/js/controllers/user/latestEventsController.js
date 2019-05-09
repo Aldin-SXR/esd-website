@@ -16,6 +16,9 @@ const latestEventsController = ($scope, $http, $location, $window) => {
                     /* Convert to human-friendly dates */
                     response.data.events[i].start_date = new Date(response.data.events[i].start_date).toLocaleDateString();
                     response.data.events[i].end_date = new Date(response.data.events[i].end_date).toLocaleDateString();
+                    if (!response.data.events[i].banner || response.data.events[i].banner === "" || response.data.events[i].banner === null) {
+                        response.data.events[i].banner = "img/no_image_available.png";
+                    }
                 }
             }
             $scope.events = response.data.events;

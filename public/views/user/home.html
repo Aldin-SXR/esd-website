@@ -90,20 +90,19 @@
                     No active events available in this category.
                 </p>
             </div>
-            <div style="margin-bottom: 10px;" ng-repeat="event in events" class="mix col-lg-3 col-md-4 col-sm-6 finance">
-                <div class="card">
-                    <div class="card-header">
-                            <span class="badge badge-primary">{{ event.start_date }}</span>
-                            -
-                            <span class="badge badge-danger">{{ event.end_date }}</span>
+            <div ng-repeat="event in events" class="mix col-lg-3 col-md-4 col-sm-6 finance">
+                <div class="course-item">
+                    <div class="course-thumb set-bg" ng-style="{ 'background-image': 'url({{ event.banner }})' }">
+                        <div title="Start date" class="price">{{ event.start_date }}</div>
+                        <div title="End date" class="price" style="background-color: red; box-shadow: 10px;">{{ event.end_date }}</div>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ event.title }}</h5>
-                        <p class="card-text" ng-bind-html="event.description | limitHtml : 100:'...' | trustAsHtml"></p>
-                        <button class="btn btn-primary" ng-click="openEvent(event._id)">See more</button>
-                    </div>
-                    <div class="card-footer text-muted">
-                        Category: {{ event.category_name }}
+                    <div class="course-info">
+                        <div class="course-text">
+                            <h5 title="Open event" class="open-article" ng-click="openEvent(info._id)">{{
+                                event.title }}</h5>
+                            <p ng-bind-html="event.description | limitHtml : 100:'...' | trustAsHtml"></p>
+                            <!-- <div class="students">120 Students</div> -->
+                        </div>
                     </div>
                 </div>
             </div>

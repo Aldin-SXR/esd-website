@@ -341,6 +341,7 @@ app.post("/private/events", (req, res) => {
         end_date: new Date(req.body.end_date),
         category_id: req.body.category_id,
         enrolled_members: [ ],
+        banner: req.body.banner,
         completed: 0
     }
     db.collection("events").insertOne(event, (error, result) => {
