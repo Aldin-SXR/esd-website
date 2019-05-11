@@ -96,6 +96,9 @@
                                         Adminstrator
                                     </th>
                                     <th>
+                                        Currently at
+                                    </th>
+                                    <th>
                                         Actions
                                     </th>
                                 </thead>
@@ -126,6 +129,9 @@
                                                     </span>
                                                 </label>
                                             </div>
+                                        </td>
+                                        <td>
+                                            {{ member.currently_at }}
                                         </td>
                                         <td class="td-actions text-left">
                                             <button ng-click="openRejectModal(member)" type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">

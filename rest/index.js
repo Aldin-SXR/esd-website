@@ -521,7 +521,7 @@ app.get("/news_categories", (req, res) => {
 app.get("/private/members/approved", (req, res) => {
     let start = parseInt(req.query.start);
     let limit = parseInt(req.query.limit);
-    db.collection("members").find({ approved_at: { $exists: true } }, { name: 1, department: 1, year: 1, approved_at: 1, superuser: 1 }).skip(start).limit(limit).toArray((error, members) => {
+    db.collection("members").find({ approved_at: { $exists: true } }, { name: 1, department: 1, year: 1, approved_at: 1, currently_at: 1, superuser: 1 }).skip(start).limit(limit).toArray((error, members) => {
         if (error) {
             throw error;
         }
