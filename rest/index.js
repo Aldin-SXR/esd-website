@@ -10,6 +10,14 @@ const Config = require("./Config");
 
 let db;
 let app = express();
+/* Set up mailing server */
+const transporter = nodeMailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+    requireTLS: true,
+    auth: Config.MAIL_AUTH
+});
 
 app.use(cors({credentials: true, origin: true}));
 app.use((req, res, next) => {
@@ -156,15 +164,6 @@ app.post("/contact", (req, res) => {
         res.status(400).send({ message: "Invalid contact data." });
         return;
     }
-
-    /* Set up mailing server */
-    let transporter = nodeMailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false,
-        requireTLS: true,
-        auth: Config.MAIL_AUTH
-    });
 
     /* Set up mail */
     let mailOptions = {
@@ -556,15 +555,6 @@ app.put("/private/members/approve/:id", (req, res) => {
             throw error;
         }
         if (result.value) {
-            /* Set up mailing server */
-            let transporter = nodeMailer.createTransport({
-                host: 'smtp.gmail.com',
-                port: 587,
-                secure: false,
-                requireTLS: true,
-                auth: Config.MAIL_AUTH
-            });
-
             /* Set up mail */
             let mailOptions = {
                 from: "no-reply@esdclub.com",
