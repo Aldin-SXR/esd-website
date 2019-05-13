@@ -45,7 +45,7 @@ app.use("/", (req, res, next) => {
     }
 });
 
-app.use(express.static("../public"));
+app.use(express.static("public"));
 
 /**
  * Non-user endpoints
@@ -556,7 +556,32 @@ app.put("/private/members/approve/:id", (req, res) => {
             throw error;
         }
         if (result.value) {
-            res.json({ success: true, message: "Membership successfully approved." });
+            /* Set up mailing server */
+            let transporter = nodeMailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 587,
+                secure: false,
+                requireTLS: true,
+                auth: Config.MAIL_AUTH
+            });
+
+            /* Set up mail */
+            let mailOptions = {
+                from: "no-reply@esdclub.com",
+                to: result.value.email_address,
+                subject: "IBU ESD | Membership approved",
+                html: `Hello, ${result.value.name}, and thank you for taking an interest in IBU Embedded System Design Electronics Club. <br /> 
+                    Your membership has been approved, and you can now log in and enjoy member benefits.`
+            }
+
+            /* Send mail */
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    res.status(400).send({ message: "Unkown mailing error." });
+                    throw error;
+                }
+                res.json({ success: true, message: "Membership successfully approved." });
+            });
         } else {
             res.status(404).send({ status: "The member by the given ID was not found." });
         }
