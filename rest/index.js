@@ -53,6 +53,11 @@ app.use("/", (req, res, next) => {
     }
 });
 
+app.use((req, res, next) => {
+    req.headers['if-none-match'] = 'no-match-for-this';
+    next();
+});
+
 app.use(express.static("public"));
 
 /**
