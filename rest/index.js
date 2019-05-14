@@ -72,6 +72,15 @@ app.get("/news", (req, res) => {
     })
 })
 
+app.get("/members/alumni", (req, res) => {
+    db.collection("members").find({ display_alumni: true }, { name: 1, currently_at: 1, department: 1 }).toArray((error, alumni) => {
+        if (error) {
+            console.log(error);
+        }
+        res.json(alumni);
+    })
+})
+
 app.post("/login", (req, res) => {
     /* Check for empty data */
     if (!req.body.email_address || !req.body.password) {
@@ -230,56 +239,46 @@ app.get("/news/preview", (req, res) => {
     let category_id = req.query.category_id;
     let query = {}
     if (category_id) {
-        query = { category_id: category_id };
+        query = { category_id: ObjectID(category_id) };
     }
-    db.collection("news").find(query, { content: 0 }).sort({ published_at: -1 }).skip(start).limit(limit).toArray((error, news) => {
-        if (error) {
-            throw error;
-        }
-        if (!news.length) {
-            res.json([]);
+    db.collection("news").aggregate([
+        { $match: query },
+        { $project: { content: 0 } },
+        { $lookup: {
+            from: 'members',
+            localField: 'author_id',
+            foreignField: '_id',
+            as: 'author'
+        } },
+        { $lookup: {
+            from: 'news_categories',
+            localField: 'category_id',
+            foreignField: '_id',
+            as: 'category'
+        } },
+        { $unwind: '$author' },
+        { $unwind: '$category' },
+        { $sort: { published_at: -1 } },
+        { $skip: start },
+        { $limit: limit },
+        { $project: {
+            'title': 1, 'description': 1, 'author_id': 1, 'category_id': 1, 'published_at': 1, 'disable_comments': 1, 'image': 1,
+            'last_edited_at': 1, 'author_name': '$author.name', 'author_title': '$author.title', 'author_picture': '$author.picture', 
+            'category_name': '$category.name'
+        } }
+    ]).toArray((error, news) => {
+        let c = 0;
+        /* Return count of all news */
+        db.collection("news").count(query, (error, numOfNews) => {
+            if (error) {
+                throw error;
+            }
+            res.json({
+                numOfNews: numOfNews,
+                news: news
+            });
             return;
-        }
-        /* Match with authors */
-        let categoryCounter = 0;
-        let authorCounter = 0;
-        news.forEach((info) => {
-            db.collection("members").find({ _id: ObjectID(info.author_id) }, { _id: 1, name: 1, title: 1, picture: 1 }).toArray((error, author) => {
-                if (error) {
-                    throw error;
-                }
-                info.author_name = author[0].name;
-                info.author_title = author[0].title;
-                info.author_picture = author[0].picture;
-                authorCounter++;
-                // if (authorCounter == news.length && categoryCounter == news.length) {
-                //     res.json(news);
-                // }
-            });
-        });
-        /* Match with categories */
-        news.forEach((info) => {
-            db.collection("news_categories").find({ _id: ObjectID(info.category_id) }, { _id: 1, name: 1 }).toArray((error, category) => {
-                if (error) {
-                    throw error;
-                }
-                info.category_name = category[0].name
-                categoryCounter++;
-                if (categoryCounter == news.length && authorCounter == news.length) {
-                    /* Return count of all news */
-                    db.collection("news").count(query, (error, numOfNews) => {
-                        if (error) {
-                            throw error;
-                        }
-                        res.json({
-                            numOfNews: numOfNews,
-                            news: news
-                        });
-                        return;
-                    })
-                }
-            });
-        });
+        })
     });
 });
 
@@ -291,7 +290,7 @@ app.get("/events/preview", (req, res) => {
     let completed = parseInt(req.query.completed);
     let query = { completed: completed }
     if (category_id) {
-        query.category_id =  category_id;
+        query.category_id =  ObjectID(category_id);
     }
     db.collection("events").find(query, { }).skip(start).limit(limit).sort({ start_date: -1 }).toArray((error, events) => {
         if (error) {
@@ -343,7 +342,7 @@ app.post("/private/events", (req, res) => {
         description: req.body.description,
         start_date: new Date(req.body.start_date),
         end_date: new Date(req.body.end_date),
-        category_id: req.body.category_id,
+        category_id: ObjectID(req.body.category_id),
         enrolled_members: [ ],
         banner: req.body.banner,
         completed: 0
@@ -602,8 +601,8 @@ app.post("/private/news", (req, res) => {
         title: req.body.title,
         description: req.body.description,
         content: req.body.content,
-        author_id: req.body.author_id,
-        category_id: req.body.category_id,
+        author_id: ObjectID(req.body.author_id),
+        category_id: ObjectID(req.body.category_id),
         published_at: new Date(),
         disable_comments: req.body.disable_comments
     }

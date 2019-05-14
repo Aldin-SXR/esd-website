@@ -1,0 +1,47 @@
+<!-- Page info -->
+<div class="page-info-section set-bg" ng-style="{ 'background-image': 'url(img/page-bg/about_page.jpg)' }">
+    <div class="container">
+        <div class="site-breadcrumb">
+            <a href="#!/">Home</a>
+            <span>About us</span>
+        </div>
+    </div>
+</div>
+<!-- Page info end -->
+
+<!-- Page -->
+<section class="contact-page spad pb-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title mb-0">
+                        <h2>Our Alumni</h2>
+                        <p>Get in touch with our alumni.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section class="course-section spad" ng-controller="membersController">
+    <div class="container">
+        <div class="row justify-content-center" ng-controller="alumniController">
+            <div style="margin-bottom: 10px;" ng-repeat="member in alumni" class="col-xs-12 col-md-8">
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-md-4 center-content">
+                        <img style="width: 100px; height: auto" src="img/alumni.png">
+                    </div>
+                    <div class="col-md-8 center-content">
+                        <h4 class="member-title">{{ member.name }}</h4>
+                        <h6><span class="text-muted">Graduated from:</span> &nbsp; {{ member.department }} &nbsp;</h6>
+                        <h6><span class="text-muted">Currently at:</span> &nbsp; {{ member.currently_at }} &nbsp;</h6>
+                        <br>
+                        <p>
+                            {{ member.short_bio }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

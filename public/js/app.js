@@ -10,6 +10,9 @@ app.config(($routeProvider) => {
     }).when("/about", {
         templateUrl: "views/user/about.html",
         activeTab: "about"
+    }).when("/alumni", {
+        templateUrl: "views/user/alumni.html",
+        activeTab: "alumni"
     }).when("/news", {
         templateUrl: "views/user/news.html",
         activeTab: "news"
@@ -44,6 +47,7 @@ app.controller("eventsPreviewController", eventsPreviewController);
 app.controller("singleEventController", singleEventController);
 app.controller("contactController", contactController);
 app.controller("userProfileController", userProfileController);
+app.controller("alumniController", alumniController)
 
 /* Filters */
 app.filter('trustAsHtml', ['$sce', function($sce) {
