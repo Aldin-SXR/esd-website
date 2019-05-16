@@ -1,4 +1,15 @@
 const registerController = ($scope, $uibModal, toastr) => {
+	/* See if logged-in user */
+	try {
+        let token = jwt_decode(localStorage.getItem("user_token"));
+        if (token) {
+            $scope.authorized = true;
+            $scope.name = token.name;
+        }
+    } catch (e) {
+        $scope.authorized = false;
+    }
+    
     $scope.openRegisterModal = (registerData) => {
         let modal = $uibModal.open({
             animation: true,
