@@ -172,6 +172,25 @@ app.put("/private/profile/:id", (req, res) => {
     });
 });
 
+app.put("/private/profile/:id/password", (req, res) => {
+    delete req.body._id;
+    if (!req.body.old || req.body.old == '') {
+        res.status(404).send({ message: 'The password cannot be empty.' });
+    }
+    db.collection('members').findOne({ _id: ObjectID(req.params.id) }, (error, result) => {
+        if (bcrypt.compareSync(req.body.old, result.password)) {
+            if (!req.body.new || req.body.new == '') {
+                res.status(404).send({ message: 'The password cannot be empty.' });
+            }
+            db.collection('members').updateOne({ _id: ObjectID(req.params.id) }, { $set: { password: bcrypt.hashSync(req.body.new, 10) } }, (error, result) => {
+                res.json({ success: true, message: 'You have succesfully changed your password.' })
+            });
+        } else {
+            res.status(403).send({ message: 'The old password is incorrect.' }); 
+        }
+    });
+});
+
 app.post("/contact", (req, res) => {
     /* Check for empty data */
     if (!req.body.email_address || !req.body.message || !req.body.name) {
@@ -601,6 +620,7 @@ app.post("/private/news", (req, res) => {
         title: req.body.title,
         description: req.body.description,
         content: req.body.content,
+        image: req.body.image,
         author_id: ObjectID(req.body.author_id),
         category_id: ObjectID(req.body.category_id),
         published_at: new Date(),
@@ -616,6 +636,8 @@ app.post("/private/news", (req, res) => {
 
 app.put("/private/news/:id", (req, res) => {
     delete req.body._id;
+    req.body.author_id = ObjectID(req.body.author_id);
+    req.body.category_id =ObjectID(req.body.category_id);
     /* Set a last edit date */
     req.body.last_edited_at = new Date();
     db.collection("news").findOneAndUpdate({ _id: ObjectID(req.params.id) }, { $set: req.body }, (error, result) => {

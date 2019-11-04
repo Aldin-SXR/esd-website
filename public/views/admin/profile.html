@@ -90,7 +90,7 @@
             <div class="col-md-4">
                 <div class="card card-profile">
                     <div class="card-avatar">
-                        <a href="#pablo">
+                        <a href="#!profile">
                             <img class="img" src="{{ profile.picture }}" />
                         </a>
                     </div>
@@ -101,6 +101,54 @@
                             {{ profile.short_bio }}
                         </p>
                         <a target="_blank" href="{{ profile.social_links.linkedin }}" class="btn btn-primary btn-round">Follow</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Change Password</h4>
+                        <p class="card-category">Update your password.</p>
+                    </div>
+                    <div class="card-body">
+                        <form name="passwordForm">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Old password:</label>
+                                        <input ng-model="password.old" type="password" class="form-control" required name="oldPassword">
+                                        <span style="color: red;" ng-show="passwordForm.oldPassword.$dirty && passwordForm.oldPassword.$invalid">
+                                                <small class="form-text">Old password is required.</small>
+                                            </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">New password:</label>
+                                        <input ng-model="password.new" type="password" class="form-control" required name="newPassword">
+                                        <span style="color: red;" ng-show="passwordForm.newPassword.$dirty && passwordForm.newPassword.$invalid">
+                                                <small class="form-text">New password is required.</small>
+                                            </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Retype new password:</label>
+                                        <input ng-model="password.reNew" type="password" class="form-control" required name="reNewPassword">
+                                        <span style="color: red;" ng-show="passwordForm.reNewPassword.$dirty && passwordForm.reNewPassword.$invalid">
+                                                <small class="form-text">Please retype the new password.</small>
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary pull-right" ng-click="updatePassword()" ng-disabled="passLoading">
+                                <span ng-show="!passLoading">Update Password</span>
+                                <span ng-show="passLoading"><i class="fa fa-spinner fa-spin"></i>&nbsp;Updating...</span>
+                            </button>
+                            <div class="clearfix"></div>
+                        </form>
                     </div>
                 </div>
             </div>
